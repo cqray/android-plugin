@@ -3,10 +3,12 @@ package com.android.plugins
 import com.android.plugins.dependency.*
 import com.android.plugins.param.Group
 import com.android.plugins.param.Compiler
-import com.google.gson.Gson
+import com.android.plugins.file.GradlePropertiesInit
+import com.android.plugins.project.ProjectUtils
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import java.io.File
 
 
 /**
@@ -16,37 +18,65 @@ import org.gradle.api.Project
 @Suppress("unused")
 class Sdks : Plugin<Project> {
 
+    var useKotlin = false
+
     override fun apply(project: Project) {
         // 创建扩展
         project.extensions.create("compilers", Compiler::class.java)
         project.extensions.create("dependencyGroups", Group::class.java)
 
-        println("数据：------------------------------------${project.name}")
 
+
+        println(project.rootProject.name)
+
+        // 检查是否使用Kotlin
+        val configuration = project.buildscript.configurations.getByName("classpath")
+        useKotlin = configuration.allDependencies.any {
+            println(it.javaClass.name)
+            it.name.equals("kotlin-gradle-plugin")
+        }
+        println("使用Kotlin:${useKotlin}")
+
+        project.allprojects.forEach {
+
+
+            println("项目：" + it.name + "|" + ProjectUtils.isApplication(it) + "|" + ProjectUtils.isLibrary(it))
+            if (ProjectUtils.isApplication(it)) {
+                // 获取build.gradle文件
+                val file = File(it.projectDir, "build.gradle")
+                GradleFileParser.parse(file)
+
+//                val configuration = project.buildscript.configurations.getByName("classpath")
+//                useKotlin = configuration.allDependencies.any {
+//                    println(it.javaClass.name)
+//                    it.name.equals("kotlin-gradle-plugin")
+//                }
+
+
+//                println(it.)
+//                    .allDependencies.forEach {
+//                    dependency ->  println(dependency.name)
+//                }
+            }
+//            kotlin.runCatching {
+//
+//                val c = project.buildscript.configurations.getByName("android")
+//                c.allDependencies.forEach {
+//                        dependency ->
+//                    println(dependency.name)
+//                }
+//            }
+//            useKotlin = c.allDependencies.any { d -> d.name.equals("kotlin-gradle-plugin") }
+        }
+
+        // gradle.properties文件初始化
+        GradlePropertiesInit.init(project)
 
 
         // 获取扩展值
         project.afterEvaluate { p ->
             run {
                 println("数据：------------------------------------${p.name}")
-                project.allprojects.forEach { p2->
-
-                    if (p2.name == "app") {
-                        //val android = p2.providers.
-                        //println("|||||" + Gson().toJson(android))
-
-
-                        p2.properties.forEach { pp ->
-                            println("属性:" + pp.key)
-                        }
-                        println("属性22:" + Gson().toJson(p2.extensions.extraProperties))
-
-                    }
-//
-//                    val android = it.properties["android"]
-//                    println(android.toString())
-                }
-
 
                 val compiler = p.extensions.findByName("compilers") as Compiler
                 val groups = p.extensions.findByName("dependencyGroups") as Group
@@ -90,20 +120,28 @@ class Sdks : Plugin<Project> {
     companion object {
         /** Android配置 **/
         val android = Android()
+
         /** 常用第三方依赖 **/
         val common = Common()
+
         /** Cqray下第三方依赖 **/
         val cqray = Cqray()
+
         /** Java第三方依赖 **/
         val java = Java()
+
         /** Jetpack组件库 **/
         val jetpack = JetPack()
+
         /** 选择器第三方依赖 **/
         val picker = Picker()
+
         /** 图片相关第三方依赖 **/
         val picture = Picture()
+
         /** RxJava系列框架 **/
         val rx = Rx()
+
         /** 控件相关第三方依赖 **/
         val view = View()
     }

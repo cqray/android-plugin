@@ -6,7 +6,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-//        classpath "com.android.tools.build:gradle:4.0.2"
         //noinspection GradleDependency
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
@@ -16,15 +15,13 @@ apply plugin: 'kotlin'
 apply plugin: 'java-gradle-plugin'
 
 dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     // Gradle Api
     implementation gradleApi()
+    // 工具类
+    implementation 'cn.hutool:hutool-core:5.7.22'
     // 注解框架
     compileOnly 'org.jetbrains:annotations:20.1.0'
-    // Lombok框架
-    // noinspection AnnotationProcessorOnCompilePath
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
     // Json格式化
     compileOnly 'com.google.code.gson:gson:2.8.9'
 }

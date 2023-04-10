@@ -5,6 +5,7 @@ import com.android.plugins.param.Group
 import com.android.plugins.param.Compiler
 import com.android.plugins.file.GradlePropertiesInit
 import com.android.plugins.project.ProjectUtils
+import com.google.gson.Gson
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -20,11 +21,19 @@ class Sdks : Plugin<Project> {
 
     var useKotlin = false
 
+    private val gradleFiles = HashMap<String, GradleFile>()
+
     override fun apply(project: Project) {
         // 创建扩展
         project.extensions.create("compilers", Compiler::class.java)
         project.extensions.create("dependencyGroups", Group::class.java)
 
+        project.childProjects.forEach {
+            val name = it.key
+            val file = File(it.value.projectDir, "build.gradle")
+            gradleFiles[name] = GradleFile().also { f -> f.parse(file) }
+            println(Gson().toJson(gradleFiles[name]))
+        }
 
 
         println(project.rootProject.name)
@@ -40,11 +49,9 @@ class Sdks : Plugin<Project> {
         project.allprojects.forEach {
 
 
-            println("项目：" + it.name + "|" + ProjectUtils.isApplication(it) + "|" + ProjectUtils.isLibrary(it))
+//            println("项目：" + it.name + "|" + ProjectUtils.isApplication(it) + "|" + ProjectUtils.isLibrary(it))
             if (ProjectUtils.isApplication(it)) {
-                // 获取build.gradle文件
-                val file = File(it.projectDir, "build.gradle")
-                GradleFileParser.parse(file)
+
 
 //                val configuration = project.buildscript.configurations.getByName("classpath")
 //                useKotlin = configuration.allDependencies.any {

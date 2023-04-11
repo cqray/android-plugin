@@ -24,19 +24,30 @@ allprojects {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
+
 }
 
+groupOptions {
+
+    lombokEnabled true
+}
+
+
 //subprojects { project ->
-//    // 默认应用所有子项目中
-//    apply plugin: 'com.android.plugins'
-//    // 不同的模块应用不同的插件
-//    if (project.name == "app") {
-//        // 入口模块依赖application
-//        apply plugin: 'com.android.application'
-//    } else {
-//        // 子模块依赖library和butterKnife
-//        apply plugin: 'com.android.library'
-//        apply plugin: 'com.jakewharton.butterknife'
+////    // 默认应用所有子项目中
+////    apply plugin: 'com.android.plugins'
+////    // 不同的模块应用不同的插件
+////    if (project.name == "app") {
+////        // 入口模块依赖application
+////        apply plugin: 'com.android.application'
+////    } else {
+////        // 子模块依赖library和butterKnife
+////        apply plugin: 'com.android.library'
+////        apply plugin: 'com.jakewharton.butterknife'
+////    }
+//    group {
+//
+//        room true
 //    }
 //}
 

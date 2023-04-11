@@ -1,35 +1,56 @@
 package com.android.plugins.dependency
 
+import org.gradle.api.Project
+
 /**
  * 适用于Java的第三方库
  * @author LeiJue
  */
 @Suppress("UNUSED")
-open class Java {
-    /// 版本号
-    private companion object Version {
-        /** 日志 **/
-        private const val logger = "2.2.0"
-        /** Java工具类 **/
-        private const val hutool = "5.7.22"
-        /** Java类扩展 **/
-        private const val lombok = "1.18.20"
-    }
-    
+object Java {
+    /** 日志 **/
+    private const val loggerVersion = "2.2.0"
+    /** Java工具类 **/
+    private const val hutoolVersion = "5.7.22"
+    /** Java类扩展 **/
+    private const val lombokVersion = "1.18.20"
+
+    /** 组件化框架 **///
+    const val autoService = "com.google.auto.service:auto-service:1.0.1"
     /** JWT加密 **///https://github.com/auth0/java-jwt
-    val jwt = "com.auth0:java-jwt:4.0.0"
+    const val jwt = "com.auth0:java-jwt:4.0.0"
     /** Html解析器 **///https://github.com/jhy/jsoup
-    val jsoup = "org.jsoup:jsoup:1.15.2"
+    const val jsoup = "org.jsoup:jsoup:1.15.2"
     /** JSON文档解析器 **///https://github.com/json-path/JsonPath
-    val jsonPath = "com.jayway.jsonpath:json-path:2.7.0"
+    const val jsonPath = "com.jayway.jsonpath:json-path:2.7.0"
     /** Html解析器 **///https://github.com/zhegexiaohuozi/JsoupXpath
-    val jsoupXPath = "cn.wanghaomiao:JsoupXpath:2.5.1"
+    const val jsoupXPath = "cn.wanghaomiao:JsoupXpath:2.5.1"
     /** 日志 **///https://github.com/orhanobut/logger
-    val logger = "com.orhanobut:logger:${Version.logger}"
+    const val logger = "com.orhanobut:logger:${loggerVersion}"
     /** Lombok增强库 **/
-    val lombok = "org.projectlombok:lombok:${Version.lombok}"
+    const val lombok = "org.projectlombok:lombok:${lombokVersion}"
     /** Java工具核心库 **/
-    val hutoolCore = "cn.hutool:hutool-core:${hutool}"
+    const val hutoolCore = "cn.hutool:hutool-core:${hutoolVersion}"
     /** Java工具全版 **/
-    val hutoolAll = "cn.hutool:hutool-all:${hutool}"
+    const val hutoolAll = "cn.hutool:hutool-all:${hutoolVersion}"
+
+    /**
+     * 添加Auto-Service框架到依赖中
+     * @param project 项目
+     */
+    internal fun addAutoServiceDependency(project: Project) {
+        project.dependencies.add("api", autoService)
+        project.dependencies.add("kapt", autoService)
+        project.dependencies.add("annotationProcessor", autoService)
+    }
+
+    /**
+     * 添加Lombok框架到依赖中
+     * @param project 项目
+     */
+    internal fun addLombokDependency(project: Project) {
+        project.dependencies.add("compileOnly", lombok)
+        project.dependencies.add("kapt", lombok)
+        project.dependencies.add("annotationProcessor", lombok)
+    }
 }

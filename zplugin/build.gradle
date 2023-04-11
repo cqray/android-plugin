@@ -11,8 +11,15 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin'
+//plugins {
+//    id 'kotlin-gradle-plugin'
+//    id 'maven-publish'
+//}
+
+
 apply plugin: 'java-gradle-plugin'
+apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -45,6 +52,19 @@ gradlePlugin {
             id = 'com.android.plugins'
             // 实现这个插件的类的路径
             implementationClass = 'com.android.plugins.Sdks'
+        }
+    }
+}
+
+publishing {
+    publications {
+        // Creates a Maven publication called "release".
+        release(MavenPublication) {
+            // Applies the component for the release build variant.
+            from components.java
+            // You can then customize attributes of the publication as shown below.
+            groupId = 'com.github.cqray'
+            artifactId = 'test-plugin'
         }
     }
 }

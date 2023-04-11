@@ -4,18 +4,19 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.2"
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
-
+//        classpath 'com.github.cqray:test-plugin:0.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 // 引入版本管理插件
 //plugins { id "com.android.plugins" apply false }
-plugins { id "com.android.plugins" }
+//plugins { id "com.android.plugins" }
 
 allprojects {
     repositories {
@@ -27,10 +28,10 @@ allprojects {
 
 }
 
-groupOptions {
-
-    lombokEnabled true
-}
+//groupOptions {
+//
+//    lombokEnabled true
+//}
 
 
 //subprojects { project ->

@@ -1,7 +1,5 @@
 package com.android.plugins.dependency
 
-import org.gradle.api.Project
-
 /**
  * 适用于Java的第三方库
  * @author LeiJue
@@ -33,24 +31,4 @@ object Java {
     const val hutoolCore = "cn.hutool:hutool-core:${hutoolVersion}"
     /** Java工具全版 **/
     const val hutoolAll = "cn.hutool:hutool-all:${hutoolVersion}"
-
-    /**
-     * 添加Auto-Service框架到依赖中
-     * @param project 项目
-     */
-    internal fun addAutoServiceDependency(project: Project) {
-        project.dependencies.add("api", autoService)
-        project.dependencies.add("kapt", autoService)
-        project.dependencies.add("annotationProcessor", autoService)
-    }
-
-    /**
-     * 添加Lombok框架到依赖中
-     * @param project 项目
-     */
-    internal fun addLombokDependency(project: Project) {
-        project.dependencies.add("compileOnly", lombok)
-        project.dependencies.add("kapt", lombok)
-        project.dependencies.add("annotationProcessor", lombok)
-    }
 }

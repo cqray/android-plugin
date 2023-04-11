@@ -11,7 +11,7 @@ class GradleFile {
     /** 项目类型 **/
     lateinit var projectType: ProjectType
 
-    var android: Android2? = null
+    var android: Android? = null
 
     private val dependencies = mutableListOf<String>()
 
@@ -22,6 +22,7 @@ class GradleFile {
         parseProjectType(lines)
         // 解析Android配置
         parseAndroid(lines)
+        // 解析依赖属性
         parseDependencies(lines)
     }
 
@@ -40,7 +41,7 @@ class GradleFile {
     }
 
     private fun parseAndroid(lines: List<String>) {
-        val android = Android2()
+        val android = Android()
         // 属性集1
         findAndErgodic(lines, "android") {
             setObjectField(android, it, "compileSdkVersion", Int::class.java)

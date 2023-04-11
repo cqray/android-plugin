@@ -1,21 +1,18 @@
 package com.android.plugins.dependency
 
 @Suppress("UNUSED")
-open class Common {
-    
-    /// 版本号
-    private companion object Version {
-        /** 组件化 **/
-        const val component = "v1.9.2.1-androidx-java8"
-        /** Retrofit网络请求 **/
-        const val retrofit = "2.9.0"
-    }
+object Common {
+
+    /** 组件化 **/
+    const val componentVersion = "v1.9.2.1-androidx-java8"
+    /** Retrofit网络请求 **/
+    const val retrofitVersion = "2.9.0"
     
     val androidId = "com.github.gzu-liyujiang:Android_CN_OAID:4.2.4"
 
     // 组件化框架  https://github.com/xiaojinzi123/Component
-    val component = "com.github.xiaojinzi123.Component:component-impl:${Version.component}"
-    val componentCompiler = "com.github.xiaojinzi123.Component:component-compiler:${Version.component}"
+    val component = "com.github.xiaojinzi123.Component:component-impl:${componentVersion}"
+    val componentCompiler = "com.github.xiaojinzi123.Component:component-compiler:${componentVersion}"
 
     /** 缓存管理 **///https://github.com/ronghao/CacheManage
     val cacheManage = "com.github.ronghao:CacheManage:1.3.5"
@@ -25,10 +22,10 @@ open class Common {
     val multiDex = "androidx.multidex:multidex:2.0.1"
 
     // Retrofit相关框架 https://github.com/square/retrofit
-    val retrofitCore = "com.squareup.retrofit2:retrofit:${retrofit}"
-    val retrofitConverter = "com.squareup.retrofit2:converter-gson:${retrofit}"
-    val retrofitAdapter2 = "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"
-    val retrofitAdapter3 = "com.squareup.retrofit2:adapter-rxjava3:${retrofit}"
+    val retrofitCore = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    val retrofitConverter = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    val retrofitAdapter2 = "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    val retrofitAdapter3 = "com.squareup.retrofit2:adapter-rxjava3:${retrofitVersion}"
     val retrofitLogger = "com.squareup.okhttp3:logging-interceptor:3.14.9"
 
     // Gson https://github.com/google/gson

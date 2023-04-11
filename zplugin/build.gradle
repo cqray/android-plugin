@@ -10,10 +10,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
-plugins {
-    id 'maven-publish'
-}
+//
+//plugins {
+//    id 'maven-publish'
+//}
 
 
 apply plugin: 'java-gradle-plugin'

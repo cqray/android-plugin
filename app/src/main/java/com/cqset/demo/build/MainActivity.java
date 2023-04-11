@@ -1,18 +1,16 @@
 package com.cqset.demo.build;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.cqset.demo.module.TtFragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-import cn.cqray.android.app.NavActivity;
 
-public class MainActivity extends NavActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadRootFragment(TtFragment.class);
+        setContentView(R.layout.activity_main);
     }
 }

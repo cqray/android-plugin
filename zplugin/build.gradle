@@ -11,10 +11,9 @@ buildscript {
     }
 }
 
-//plugins {
-//    id 'kotlin-gradle-plugin'
-//    id 'maven-publish'
-//}
+plugins {
+    id 'maven-publish'
+}
 
 
 apply plugin: 'java-gradle-plugin'

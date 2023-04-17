@@ -3,7 +3,8 @@ package com.android.plugins.configuration
 import cn.hutool.core.io.FileUtil
 import cn.hutool.core.util.StrUtil
 import com.android.plugins.Android
-import com.android.plugins.PluginOptions
+import com.android.plugins.options.ModuleOptions
+import com.android.plugins.options.PluginOptions
 import com.android.plugins.project.ProjectType
 import com.android.plugins.util.CharsetUtils
 import java.io.File
@@ -19,15 +20,15 @@ class GradleBuildConfiguration {
     var android: Android? = null
 
     /** 从文件中读取的选项信息 **/
-    var pluginOptions: PluginOptions? = null
+    var pluginOptions: ModuleOptions? = null
 
     private val dependencies = mutableListOf<String>()
 
     /** 是否是程序入口 **/
     val isApplication get() = projectType == ProjectType.APPLICATION
 
-    /** 是否是基础类库 **/
-    val isCommonLibrary get() = projectType == ProjectType.LIBRARY && pluginOptions?.commonLibrary == true
+//    /** 是否是基础类库 **/
+//    val isCommonLibrary get() = projectType == ProjectType.LIBRARY && pluginOptions?.commonLibrary == true
 
     fun parse(file: File) {
         val charset = CharsetUtils.getCharset(file)
@@ -36,10 +37,10 @@ class GradleBuildConfiguration {
         parseProjectType(lines)
         // 解析Android配置
         parseAndroid(lines)
-        // 解析PluginOptions
-        parsePluginOptions(lines)
-        // 解析依赖属性
-        parseDependencies(lines)
+        // 解析ModuleOptions
+        parseModuleOptions(lines)
+//        // 解析依赖属性
+//        parseDependencies(lines)
     }
 
     /**
@@ -96,10 +97,15 @@ class GradleBuildConfiguration {
         }
     }
 
-    private fun parsePluginOptions(lines: List<String>) {
+    private fun parseModuleOptions(lines: List<String>) {
         findAndErgodic(lines, "pluginOptions") {
-            val options = PluginOptions()
-            setObjectField(options, it, "commonLibrary", Boolean::class.java)
+            // 库模块选项
+            val options: ModuleOptions
+            if (isApplication) {
+                options = PluginOptions()
+                setObjectField(options, it, "commonModule", String::class.java)
+            } else options = ModuleOptions()
+            // 其他属性
             setObjectField(options, it, "butterKnifeEnabled", Boolean::class.java)
             setObjectField(options, it, "coroutineEnabled", Boolean::class.java)
             setObjectField(options, it, "lombokEnabled", Boolean::class.java)

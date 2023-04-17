@@ -9,6 +9,9 @@ class PluginOptions {
     /** 是否是通用库 **/
     val commonLibrary: Boolean = false
 
+    /** 通用模块 **/
+    var commonModule: String? = null
+
     /** 是否启用快速布局 **/
     var butterKnifeEnabled = false
 

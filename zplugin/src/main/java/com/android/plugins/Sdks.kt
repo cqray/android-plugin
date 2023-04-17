@@ -20,12 +20,7 @@ open class Sdks : Plugin<Project> {
 
     override fun apply(project: Project) {
         // 初始化gradle.properties文件
-        GradlePropertyConfiguration.init(project)
-        // 创建扩展插件
-        val clazz = GroupOptions::class.java
-        val extName = StrUtil.lowerFirst(clazz.simpleName)
-        project.extensions.create(extName, clazz)
-
+        GradlePropertyConfiguration.load(project)
         // 遍历所有工程
         project.rootProject.childProjects.forEach {
             // 解析build.gradle文件，并获取其中的某些配置信息
@@ -34,6 +29,13 @@ open class Sdks : Plugin<Project> {
                 f.parse(File(it.value.projectDir, "build.gradle"))
             }
         }
+
+        // 创建扩展插件
+        val clazz = GroupOptions::class.java
+        val extName = StrUtil.lowerFirst(clazz.simpleName)
+        project.extensions.create(extName, clazz)
+
+
 
 //        // 获取扩展值
 //        project.afterEvaluate { p ->
@@ -72,5 +74,7 @@ open class Sdks : Plugin<Project> {
 
         /** 控件相关第三方依赖 **/
         val view = View()
+
+        val http = Http
     }
 }

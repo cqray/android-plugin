@@ -1,8 +1,9 @@
 package com.android.plugins
 
 import cn.hutool.core.util.StrUtil
+import com.android.plugins.configuration.GradleBuildConfiguration
 import com.android.plugins.dependency.*
-import com.android.plugins.file.GradlePropertiesInit
+import com.android.plugins.configuration.GradlePropertyConfiguration
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -15,31 +16,34 @@ import java.io.File
 @Suppress("unused")
 open class Sdks : Plugin<Project> {
 
-    private val gradleFiles = HashMap<String, GradleFile>()
+    private val buildGradleConfigs = HashMap<String, GradleBuildConfiguration>()
 
     override fun apply(project: Project) {
         // 初始化gradle.properties文件
-        GradlePropertiesInit.init(project)
+        GradlePropertyConfiguration.init(project)
         // 创建扩展插件
         val clazz = GroupOptions::class.java
         val extName = StrUtil.lowerFirst(clazz.simpleName)
         project.extensions.create(extName, clazz)
+
         // 遍历所有工程
         project.rootProject.childProjects.forEach {
-            val name = it.key
-            val file = File(it.value.projectDir, "build.gradle")
-            gradleFiles[name] = GradleFile().also { f -> f.parse(file) }
+            // 解析build.gradle文件，并获取其中的某些配置信息
+            buildGradleConfigs[it.key] = GradleBuildConfiguration().also { f ->
+                // 开始解析文件
+                f.parse(File(it.value.projectDir, "build.gradle"))
+            }
         }
 
-        // 获取扩展值
-        project.afterEvaluate { p ->
-                println("数据：------------------------------------${p.name}")
-
-                // 获取依赖组参数配置
-                val options = p.extensions.findByName(extName) as? GroupOptions
-                // 加载依赖组
-                options?.loadDependencyGroups(p)
-        }
+//        // 获取扩展值
+//        project.afterEvaluate { p ->
+//                println("数据：------------------------------------${p.name}")
+//
+//                // 获取依赖组参数配置
+//                val options = p.extensions.findByName(extName) as? GroupOptions
+//                // 加载依赖组
+//                options?.loadDependencyGroups(p)
+//        }
     }
 
     companion object {
@@ -54,7 +58,8 @@ open class Sdks : Plugin<Project> {
         val java = Java
 
         /** Jetpack组件库 **/
-        val jetpack = JetPack
+        @JvmField
+        val jetpack = JetPack()
 
         /** 选择器第三方依赖 **/
         val picker = Picker()

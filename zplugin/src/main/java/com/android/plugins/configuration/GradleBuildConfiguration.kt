@@ -1,19 +1,33 @@
-package com.android.plugins
+package com.android.plugins.configuration
 
 import cn.hutool.core.io.FileUtil
 import cn.hutool.core.util.StrUtil
+import com.android.plugins.Android
+import com.android.plugins.PluginOptions
 import com.android.plugins.project.ProjectType
 import com.android.plugins.util.CharsetUtils
 import java.io.File
 
-class GradleFile {
+/**
+ * 每个模块(build.gradle)文件的
+ */
+class GradleBuildConfiguration {
 
     /** 项目类型 **/
-    lateinit var projectType: ProjectType
+    private lateinit var projectType: ProjectType
 
     var android: Android? = null
 
+    /** 从文件中读取的选项信息 **/
+    var pluginOptions: PluginOptions? = null
+
     private val dependencies = mutableListOf<String>()
+
+    /** 是否是程序入口 **/
+    val isApplication get() = projectType == ProjectType.APPLICATION
+
+    /** 是否是基础类库 **/
+    val isCommonLibrary get() = projectType == ProjectType.LIBRARY && pluginOptions?.commonLibrary == true
 
     fun parse(file: File) {
         val charset = CharsetUtils.getCharset(file)
@@ -22,6 +36,8 @@ class GradleFile {
         parseProjectType(lines)
         // 解析Android配置
         parseAndroid(lines)
+        // 解析PluginOptions
+        parsePluginOptions(lines)
         // 解析依赖属性
         parseDependencies(lines)
     }
@@ -77,6 +93,19 @@ class GradleFile {
                 }
                 i++
             }
+        }
+    }
+
+    private fun parsePluginOptions(lines: List<String>) {
+        findAndErgodic(lines, "pluginOptions") {
+            val options = PluginOptions()
+            setObjectField(options, it, "commonLibrary", Boolean::class.java)
+            setObjectField(options, it, "butterKnifeEnabled", Boolean::class.java)
+            setObjectField(options, it, "coroutineEnabled", Boolean::class.java)
+            setObjectField(options, it, "lombokEnabled", Boolean::class.java)
+            setObjectField(options, it, "serviceEnabled", Boolean::class.java)
+            setObjectField(options, it, "retrofitEnabled", Boolean::class.java)
+            setObjectField(options, it, "roomEnabled", Boolean::class.java)
         }
     }
 

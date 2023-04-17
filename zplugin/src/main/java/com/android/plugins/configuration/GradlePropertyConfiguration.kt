@@ -1,4 +1,4 @@
-package com.android.plugins.file
+package com.android.plugins.configuration
 
 import cn.hutool.core.io.FileUtil
 import cn.hutool.core.io.IoUtil
@@ -10,11 +10,11 @@ import java.io.FileInputStream
 import java.util.*
 
 /**
- * gradle.properties文件初始化
+ * (gradle.properties)文件配置
  * 解决一些常规配置问题
  * @author Cqray
  */
-object GradlePropertiesInit {
+object GradlePropertyConfiguration {
 
     fun init(project: Project) {
         // 获取gradle.properties文件

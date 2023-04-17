@@ -46,13 +46,13 @@ open class GroupOptions {
                     project.dependencies.add("annotationProcessor", Java.lombok)
                     runCatching { project.dependencies.add("kapt", Java.lombok) }
                 }
-                // 添加Room框架到依赖中
-                if (roomEnabled) {
-                    p.dependencies.add("api", JetPack.roomRuntime)
-                    p.dependencies.add("api", JetPack.roomRxjava3)
-                    p.dependencies.add("annotationProcessor", JetPack.roomCompiler)
-                    runCatching { project.dependencies.add("kapt", JetPack.roomCompiler) }
-                }
+//                // 添加Room框架到依赖中
+//                if (roomEnabled) {
+//                    p.dependencies.add("api", JetPack.roomRuntime)
+//                    p.dependencies.add("api", JetPack.roomRxjava3)
+//                    p.dependencies.add("annotationProcessor", JetPack.roomCompiler)
+//                    runCatching { project.dependencies.add("kapt", JetPack.roomCompiler) }
+//                }
                 // 添加Retrofit框架到依赖
                 if (retrofitEnabled) {
                     p.dependencies.add("api", Http.retrofit)

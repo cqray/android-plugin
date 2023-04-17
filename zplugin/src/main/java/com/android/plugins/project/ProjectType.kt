@@ -8,7 +8,7 @@ enum class ProjectType {
     /** 根工程 **/
     ROOT,
 
-    /** 入口工程 **/
+    /** 入口（主要）工程 **/
     APPLICATION,
 
     /** 类库工程 **/

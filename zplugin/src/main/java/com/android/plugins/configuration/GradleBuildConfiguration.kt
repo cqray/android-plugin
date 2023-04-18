@@ -7,6 +7,7 @@ import com.android.plugins.options.ModuleOptions
 import com.android.plugins.options.PluginOptions
 import com.android.plugins.project.ProjectType
 import com.android.plugins.util.CharsetUtils
+import com.google.gson.Gson
 import org.gradle.api.Project
 import java.io.File
 import java.lang.reflect.Field
@@ -25,12 +26,13 @@ class GradleBuildConfiguration {
     var android: Android? = null
 
     /** 从文件中读取的选项信息 **/
-    var options: ModuleOptions? = null
+    lateinit var options: ModuleOptions
 
     /** 是否是程序入口 **/
     val isApplication get() = projectType == ProjectType.APPLICATION
 
     fun parse(project: Project) {
+        println("===============${project.name}")
         // 缓存项目实例
         this.project = project
         // 获取当前项目下的build.gradle文件
@@ -82,14 +84,10 @@ class GradleBuildConfiguration {
     }
 
     private fun parseModuleOptions(lines: List<String>) {
+        // 初始化选项
+        options = if (isApplication) PluginOptions() else ModuleOptions()
         findAndErgodic(lines, "pluginOptions") {
-            // 库模块选项
-            val options: ModuleOptions
-            if (isApplication) {
-                options = PluginOptions()
-                setObjectField(options, it, "commonModule", String::class.java)
-            } else options = ModuleOptions()
-            // 其他属性
+            setObjectField(options, it, "commonModule", String::class.java)
             setObjectField(options, it, "butterKnifeEnabled", Boolean::class.java)
             setObjectField(options, it, "coroutineEnabled", Boolean::class.java)
             setObjectField(options, it, "lombokEnabled", Boolean::class.java)
@@ -98,8 +96,8 @@ class GradleBuildConfiguration {
             setObjectField(options, it, "roomEnabled", Boolean::class.java)
             setObjectField(options, it, "rxjava2Enabled", Boolean::class.java)
             setObjectField(options, it, "rxjava3Enabled", Boolean::class.java)
-            this.options = options
         }
+        println("======" + Gson().toJson(options))
     }
 
     private fun setObjectField(any: Any, line: String, name: String, clazz: Class<*>) {
@@ -107,24 +105,15 @@ class GradleBuildConfiguration {
         if (!StrUtil.contains(line, name)) return
         // 获取属性
         var field: Field? = null
-        runCatching { field = any.javaClass.getDeclaredField(name) }.onFailure { it.printStackTrace() }
-        if (field == null) runCatching { field = any.javaClass.getField(name) }.onFailure { it.printStackTrace() }
+        runCatching { field = field ?: any.javaClass.getDeclaredField(name) }
+        runCatching { field = field ?: any.javaClass.superclass?.getDeclaredField(name) }
         field?.isAccessible = true
+        // 设置值
         when (clazz) {
             Int::class.java -> field?.set(any, line.split(" ")[1].toInt())
             Boolean::class.java -> field?.set(any, line.split(" ")[1].toBoolean())
             String::class.java -> field?.set(any, line.split(" ")[1].replace("\"", "").replace("\'", ""))
         }
-//        // 设置值
-//        runCatching {
-//            val field? = any.javaClass.getDeclaredField()
-//            field.isAccessible = true
-//            when (clazz) {
-//                Int::class.java -> field.set(any, line.split(" ")[1].toInt())
-//                Boolean::class.java -> field.set(any, line.split(" ")[1].toBoolean())
-//                String::class.java -> field.set(any, line.split(" ")[1].replace("\"", "").replace("\'", ""))
-//            }
-//        }.onFailure { it.printStackTrace() }
     }
 
     /**

@@ -1,7 +1,5 @@
 package com.android.plugins
 
-import org.gradle.internal.impldep.com.amazonaws.jmespath.OpGreaterThan
-
 internal object Configuration {
 
     /** 目标SDK版本 **/

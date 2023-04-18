@@ -16,10 +16,11 @@ import java.util.*
  */
 object GradlePropertyConfiguration {
 
-    /** 是否有基础 **/
-    var hasCommonLibrary = false
-
-    fun load(project: Project) {
+    /**
+     * 初始化gradle.properties配置信息
+     * @param project 项目
+     */
+    fun init(project: Project) {
         // 获取gradle.properties文件
         val file = File(project.rootDir , "gradle.properties")
         // 获取文件Charset

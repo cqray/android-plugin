@@ -39,15 +39,14 @@ open class Sdks : Plugin<Project> {
             if (!it.isApplication) return
         }
         // 初始化gradle.properties文件
-        GradlePropertyConfiguration.load(project)
+        GradlePropertyConfiguration.init(project)
         // 遍历所有工程
         project.rootProject.childProjects.forEach {
             if (it.value == project) return@forEach
             // 解析build.gradle文件，并获取其中的某些配置信息
             buildGradleConfigs[it.key] = GradleBuildConfiguration().also { f -> f.parse(it.value) }
         }
-
-
+        // 遍历加载依赖
         buildGradleConfigs.forEach {
             val configuration = it.value
             val isApplication = configuration.isApplication

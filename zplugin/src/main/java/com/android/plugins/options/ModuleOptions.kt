@@ -1,10 +1,5 @@
 package com.android.plugins.options
 
-//import com.android.plugins.Sdks
-//import com.android.plugins.configuration.GradleBuildConfiguration
-//import com.android.plugins.dependency.Java
-//import com.android.plugins.dependency.View
-
 /**
  * 插件选项
  * @author Cqray
@@ -16,7 +11,6 @@ open class ModuleOptions {
 
     /** 是否启用协程 **/
     var coroutineEnabled = false
-
 
     /** 是否启用Lombok **/
     var lombokEnabled = false
@@ -33,8 +27,10 @@ open class ModuleOptions {
     /** 是否启用Room数据库 **/
     var roomEnabled = false
 
+    /** 是否启用Rxjava2 **/
     var rxjava2Enabled = false
 
+    /** 是否启用Rxjava3 **/
     var rxjava3Enabled = false
 
 

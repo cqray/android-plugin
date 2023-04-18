@@ -29,8 +29,18 @@ android {
     }
 }
 
-groupOptions {
+//pluginOptions {
+//
+//    lombokEnabled true
+//}
 
+pluginOptions {
+
+    coroutineEnabled true
+//    roomEnabled true
+//    rxjava2Enabled true
+
+//    coroutineEnabled true
     lombokEnabled true
 }
 

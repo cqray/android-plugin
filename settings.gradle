@@ -2,3 +2,4 @@ include ':app'
 rootProject.name = "BuildSrcDemo"
 //include("zplugin")
 includeBuild("zplugin")
+include ':testLibrary'

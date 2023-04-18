@@ -4,10 +4,12 @@ import cn.hutool.core.util.StrUtil
 import com.android.plugins.configuration.GradleBuildConfiguration
 import com.android.plugins.dependency.*
 import com.android.plugins.configuration.GradlePropertyConfiguration
+import com.android.plugins.options.ModuleOptions
+import com.android.plugins.options.PluginOptions
+//import com.android.plugins.options.PluginOptions
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import java.io.File
 
 /**
  * 版本依赖管理插件
@@ -16,36 +18,234 @@ import java.io.File
 @Suppress("unused")
 open class Sdks : Plugin<Project> {
 
+    /** 所有配置信息缓存 **/
     private val buildGradleConfigs = HashMap<String, GradleBuildConfiguration>()
 
+    /** 获取插件配置 **/
+    private val options: PluginOptions?
+        get() {
+            for (it in buildGradleConfigs) {
+                if (it.value.isApplication) return it.value.options as PluginOptions?
+            }
+            return null
+        }
+
     override fun apply(project: Project) {
+        // 获取项目的一些配置信息
+        GradleBuildConfiguration().let {
+            buildGradleConfigs[project.name] = it
+            it.parse(project)
+            // 不是Application则不处理
+            if (!it.isApplication) return
+        }
         // 初始化gradle.properties文件
         GradlePropertyConfiguration.load(project)
         // 遍历所有工程
         project.rootProject.childProjects.forEach {
+            if (it.value == project) return@forEach
             // 解析build.gradle文件，并获取其中的某些配置信息
-            buildGradleConfigs[it.key] = GradleBuildConfiguration().also { f ->
-                // 开始解析文件
-                f.parse(File(it.value.projectDir, "build.gradle"))
-            }
+            buildGradleConfigs[it.key] = GradleBuildConfiguration().also { f -> f.parse(it.value) }
         }
 
-        // 创建扩展插件
-        val clazz = GroupOptions::class.java
-        val extName = StrUtil.lowerFirst(clazz.simpleName)
-        project.extensions.create(extName, clazz)
 
+        buildGradleConfigs.forEach {
+            val configuration = it.value
+            val isApplication = configuration.isApplication
+            // 类型
+            val aClass = if (isApplication) PluginOptions::class.java else ModuleOptions::class.java
+            // 扩展名
+            val extensionName = StrUtil.lowerFirst(aClass.simpleName)
+            // 创建扩展
+            configuration.project.extensions.create(extensionName, aClass)
+            // 不是入口模块，则引用插件
+            if (!isApplication) configuration.project.plugins.apply("com.android.plugins")
+            // 加载依赖
+            loadDependencies(options, configuration)
+        }
+    }
 
+    /**
+     * 加载依赖
+     * @param options 插件选项
+     * @param configuration 构建参数
+     */
+    private fun loadDependencies(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        // 获取项目实例
+        val project = configuration.project
+        // 后续操作
+        project.afterEvaluate {
+            // 添加ButterKnife框架到依赖中
+            loadButterKnife(options, configuration)
+            // 添加协程到框架中
+            loadCoroutine(options, configuration)
+            // 添加Lombok框架到依赖中
+            loadLombok(options, configuration)
+            // 添加Retrofit框架到依赖
+            loadRetrofit(options, configuration)
+            // 添加Room框架到依赖中
+            loadRoom(options, configuration)
+            // 添加Rxjava2框架到依赖
+            loadRxjava2(options, configuration)
+            // 添加Rxjava3框架到依赖
+            loadRxjava3(options, configuration)
+            // 添加Auto-Service框架到依赖中
+            loadService(options, configuration)
+        }
+    }
 
-//        // 获取扩展值
-//        project.afterEvaluate { p ->
-//                println("数据：------------------------------------${p.name}")
-//
-//                // 获取依赖组参数配置
-//                val options = p.extensions.findByName(extName) as? GroupOptions
-//                // 加载依赖组
-//                options?.loadDependencyGroups(p)
-//        }
+    /**
+     * 加载ButterKnife框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadButterKnife(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        if (isEnabled(options, configuration) { it?.butterKnifeEnabled }) {
+            project.dependencies.add("api", View().butterKnife)
+            project.dependencies.add("annotationProcessor", View().butterKnifeCompiler)
+            runCatching { project.dependencies.add("kapt", View().butterKnifeCompiler) }
+        }
+    }
+
+    /**
+     * 加载协程框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadCoroutine(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        if (isEnabled(options, configuration) { it?.coroutineEnabled }) {
+            project.dependencies.add("api", jetpack.ktxAndroid)
+            project.dependencies.add("api", jetpack.ktxLivedata)
+            project.dependencies.add("api", jetpack.ktxRuntime)
+            project.dependencies.add("api", jetpack.ktxViewModel)
+        }
+    }
+
+    /**
+     * 加载Lombok框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadLombok(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        if (isEnabled(options, configuration) { it?.lombokEnabled }) {
+            println("========================加载了")
+            project.dependencies.add("compileOnly", Java.lombok)
+            project.dependencies.add("annotationProcessor", Java.lombok)
+            runCatching { project.dependencies.add("kapt", Java.lombok) }
+        }
+    }
+
+    /**
+     * 加载Retrofit框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadRetrofit(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        val rxjava2Enabled = isEnabled(options, configuration) { it?.rxjava2Enabled }
+        val rxjava3Enabled = isEnabled(options, configuration) { it?.rxjava3Enabled }
+        if (isEnabled(options, configuration) { it?.retrofitEnabled }) {
+            project.dependencies.add("api", http.retrofit)
+            project.dependencies.add("api", http.retrofitGsonConverter)
+            project.dependencies.add("api", http.retrofitLogger)
+            if (rxjava2Enabled) project.dependencies.add("api", http.retrofitRx2Adapter)
+            if (rxjava3Enabled) project.dependencies.add("api", http.retrofitRx3Adapter)
+        }
+    }
+
+    /**
+     * 加载Room框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadRoom(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        val rxjava2Enabled = isEnabled(options, configuration) { it?.rxjava2Enabled }
+        val rxjava3Enabled = isEnabled(options, configuration) { it?.rxjava3Enabled }
+        val coroutineEnabled = isEnabled(options, configuration) { it?.coroutineEnabled }
+        if (isEnabled(options, configuration) { it?.roomEnabled }) {
+            project.dependencies.add("api", jetpack.roomRuntime)
+            project.dependencies.add("annotationProcessor", jetpack.roomCompiler)
+            runCatching { project.dependencies.add("kapt", jetpack.roomCompiler) }
+            // 启用rxjava2
+            if (rxjava2Enabled) project.dependencies.add("api", jetpack.roomRxjava2)
+            // 启用rxjava3
+            if (rxjava3Enabled) project.dependencies.add("api", jetpack.roomRxjava3)
+            // 启用协程
+            if (coroutineEnabled) project.dependencies.add("api", jetpack.roomCoroutine)
+        }
+    }
+
+    /**
+     * 加载Rxjava2框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadRxjava2(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        if (isEnabled(options, configuration) { it?.rxjava2Enabled }) {
+            project.dependencies.add("api", rx.java2)
+            project.dependencies.add("api", rx.android2)
+        }
+    }
+
+    /**
+     * 加载Rxjava3框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadRxjava3(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        if (isEnabled(options, configuration) { it?.rxjava3Enabled }) {
+            project.dependencies.add("api", rx.java3)
+            project.dependencies.add("api", rx.android3)
+        }
+    }
+
+    /**
+     * 加载组件化框架
+     * @param options 插件选项
+     * @param configuration gradle配置
+     */
+    private fun loadService(options: PluginOptions?, configuration: GradleBuildConfiguration) {
+        val project = configuration.project
+        if (isEnabled(options, configuration) { it?.serviceEnabled }) {
+            project.dependencies.add("api", Java.autoService)
+            project.dependencies.add("annotationProcessor", Java.autoService)
+            runCatching { project.dependencies.add("kapt", Java.autoService) }
+        }
+    }
+
+    /**
+     * 检查某个框架组是否启用
+     * @param options 插件选项
+     * @param configuration build.gradle参数
+     * @param func 属性获取
+     */
+    private fun isEnabled(
+        options: PluginOptions?,
+        configuration: GradleBuildConfiguration,
+        func: Function1<ModuleOptions?, Boolean?>
+    ): Boolean {
+        val project = configuration.project
+        // 是否是通用模块
+        val isCommonLibrary = project.name == options?.commonModule
+        // 是否是其他模块
+        val isOtherLibrary = !configuration.isApplication && !isCommonLibrary
+        // 获取模块的选项
+        val moduleOption = func.invoke(configuration.options) ?: false
+        // 获取插件的选项
+        val pluginOption = func.invoke(options) ?: false
+
+        println("${project.name}|$isOtherLibrary|$isCommonLibrary|$moduleOption$pluginOption")
+        return when {
+            isOtherLibrary -> moduleOption
+            isCommonLibrary -> moduleOption || pluginOption
+            configuration.isApplication -> pluginOption
+            else -> false
+        }
     }
 
     companion object {

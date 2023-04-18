@@ -21,5 +21,6 @@ object Http {
     const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
     const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     const val retrofitRx3Adapter = "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
+    const val retrofitRx2Adapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     const val retrofitLogger = "com.squareup.okhttp3:logging-interceptor:3.14.9"
 }

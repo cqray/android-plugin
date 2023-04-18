@@ -1,6 +1,7 @@
 buildscript {
 
-    ext.kotlin_version = '1.5.31'
+//    ext.kotlin_version = '1.5.31'
+    ext.kotlin_version = '1.6.21'
     repositories {
         google()
         mavenCentral()
@@ -30,6 +31,11 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:20.1.0'
     // Json格式化
     compileOnly 'com.google.code.gson:gson:2.8.9'
+
+//    // Lombok框架
+//    // noinspection AnnotationProcessorOnCompilePath
+//    compileOnly 'org.projectlombok:lombok:1.18.20'
+//    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
 compileKotlin {

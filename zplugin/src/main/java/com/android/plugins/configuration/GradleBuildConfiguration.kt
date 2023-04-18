@@ -7,7 +7,9 @@ import com.android.plugins.options.ModuleOptions
 import com.android.plugins.options.PluginOptions
 import com.android.plugins.project.ProjectType
 import com.android.plugins.util.CharsetUtils
+import org.gradle.api.Project
 import java.io.File
+import java.lang.reflect.Field
 
 /**
  * 每个模块(build.gradle)文件的
@@ -17,21 +19,25 @@ class GradleBuildConfiguration {
     /** 项目类型 **/
     private lateinit var projectType: ProjectType
 
+    lateinit var project: Project
+        private set
+
     var android: Android? = null
 
     /** 从文件中读取的选项信息 **/
-    var pluginOptions: ModuleOptions? = null
-
-    private val dependencies = mutableListOf<String>()
+    var options: ModuleOptions? = null
 
     /** 是否是程序入口 **/
     val isApplication get() = projectType == ProjectType.APPLICATION
 
-//    /** 是否是基础类库 **/
-//    val isCommonLibrary get() = projectType == ProjectType.LIBRARY && pluginOptions?.commonLibrary == true
-
-    fun parse(file: File) {
+    fun parse(project: Project) {
+        // 缓存项目实例
+        this.project = project
+        // 获取当前项目下的build.gradle文件
+        val file = File(project.projectDir, "build.gradle")
+        // 获取文件编码
         val charset = CharsetUtils.getCharset(file)
+        // 获取内容为行
         val lines = FileUtil.readLines(file, charset)
         // 解析项目类型
         parseProjectType(lines)
@@ -39,8 +45,6 @@ class GradleBuildConfiguration {
         parseAndroid(lines)
         // 解析ModuleOptions
         parseModuleOptions(lines)
-//        // 解析依赖属性
-//        parseDependencies(lines)
     }
 
     /**
@@ -77,26 +81,6 @@ class GradleBuildConfiguration {
         if (android.versionName.isNotEmpty()) this.android = android
     }
 
-    private fun parseDependencies(lines: List<String>) {
-        val indexArray = findIndex(lines, "dependencies")
-        indexArray?.let {
-            val newList = lines.subList(it[0], it[1] + 1)
-            var i = 0
-            while (i < newList.size) {
-                i = skipAnnotateAndBlank(newList, i)
-                val line = StrUtil.trim(newList[i])
-                if (StrUtil.contains(line, "implementation")
-                    || StrUtil.contains(line, "compile")
-                    || StrUtil.contains(line, "api")
-                ) runCatching {
-                    // 添加到列表中
-                    if (!StrUtil.contains(line, "fileTree")) dependencies.add(line.split(" ")[1])
-                }
-                i++
-            }
-        }
-    }
-
     private fun parseModuleOptions(lines: List<String>) {
         findAndErgodic(lines, "pluginOptions") {
             // 库模块选项
@@ -112,22 +96,35 @@ class GradleBuildConfiguration {
             setObjectField(options, it, "serviceEnabled", Boolean::class.java)
             setObjectField(options, it, "retrofitEnabled", Boolean::class.java)
             setObjectField(options, it, "roomEnabled", Boolean::class.java)
+            setObjectField(options, it, "rxjava2Enabled", Boolean::class.java)
+            setObjectField(options, it, "rxjava3Enabled", Boolean::class.java)
+            this.options = options
         }
     }
 
     private fun setObjectField(any: Any, line: String, name: String, clazz: Class<*>) {
         // 不存在指定属性
         if (!StrUtil.contains(line, name)) return
-        // 设置值
-        runCatching {
-            val field = any.javaClass.getDeclaredField(name)
-            field.isAccessible = true
-            when (clazz) {
-                Int::class.java -> field.set(any, line.split(" ")[1].toInt())
-                Boolean::class.java -> field.set(any, line.split(" ")[1].toBoolean())
-                String::class.java -> field.set(any, line.split(" ")[1].replace("\"", "").replace("\'", ""))
-            }
+        // 获取属性
+        var field: Field? = null
+        runCatching { field = any.javaClass.getDeclaredField(name) }.onFailure { it.printStackTrace() }
+        if (field == null) runCatching { field = any.javaClass.getField(name) }.onFailure { it.printStackTrace() }
+        field?.isAccessible = true
+        when (clazz) {
+            Int::class.java -> field?.set(any, line.split(" ")[1].toInt())
+            Boolean::class.java -> field?.set(any, line.split(" ")[1].toBoolean())
+            String::class.java -> field?.set(any, line.split(" ")[1].replace("\"", "").replace("\'", ""))
         }
+//        // 设置值
+//        runCatching {
+//            val field? = any.javaClass.getDeclaredField()
+//            field.isAccessible = true
+//            when (clazz) {
+//                Int::class.java -> field.set(any, line.split(" ")[1].toInt())
+//                Boolean::class.java -> field.set(any, line.split(" ")[1].toBoolean())
+//                String::class.java -> field.set(any, line.split(" ")[1].replace("\"", "").replace("\'", ""))
+//            }
+//        }.onFailure { it.printStackTrace() }
     }
 
     /**

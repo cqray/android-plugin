@@ -14,7 +14,7 @@ open class View {
         /** ButterKnife快速布局 **/
         const val butterKnife = "10.2.3"
         /** 刷新框架 **/
-        const val smartRefresh = "2.0.3"
+        const val smartRefresh = "2.0.5"
         /** MLKit系列库，targetSdkVersion <= 30 **/
         const val mlkit = "1.1.0"
         /** MLKit系列库，targetSdkVersion >= 31 **/
@@ -56,7 +56,7 @@ open class View {
     val spinKit = "com.github.ybq:Android-SpinKit:1.4.0"
     /** 下拉选择框 **///https://github.com/arcadefire/nice-spinner
     val spinner = "com.github.arcadefire:nice-spinner:1.4.5"
-    /** 文本处理 **/
+    /** 文本处理 **///https://github.com/iwgang/SimplifySpan
     val spannable = "com.github.iwgang:simplifyspan:2.1"
 
     /** 刷新核心依赖库 **/

@@ -21,13 +21,13 @@ class JetPack {
 
     /// 协程依赖
 
-    val ktxAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
     /// 协程扩展
 
-    val ktxViewModel get() = "androidx.lifecycle:lifecycle-viewmodel-ktx:$ktxExtVersion"
-    val ktxRuntime get() = "androidx.lifecycle:lifecycle-runtime-ktx:$ktxExtVersion"
-    val ktxLivedata get() = "androidx.lifecycle:lifecycle-livedata-ktx:$ktxExtVersion"
+    val coroutineViewModel get() = "androidx.lifecycle:lifecycle-viewmodel-ktx:$coroutineExtVersion"
+    val coroutineRuntime get() = "androidx.lifecycle:lifecycle-runtime-ktx:$coroutineExtVersion"
+    val coroutineLivedata get() = "androidx.lifecycle:lifecycle-livedata-ktx:$coroutineExtVersion"
 
     val core get() = "androidx.core:core:1.6.0"
 
@@ -44,7 +44,7 @@ class JetPack {
         private val roomVersion: String = Configuration.createDepVersion("2.3.0", "2.5.1")
 
         /** 协程扩展版本 **/
-        private val ktxExtVersion: String get() = Configuration.createDepVersion("2.3.1", "2.5.1")
+        private val coroutineExtVersion: String get() = Configuration.createDepVersion("2.3.1", "2.5.1")
 
     }
 }

@@ -5,7 +5,7 @@ package com.android.plugins.dependency
  * @author LeiJue
  */
 @Suppress("unused")
-class Java {
+open class Java {
 
     /** 组件化框架 **///
     val autoService = "com.google.auto.service:auto-service:1.0.1"

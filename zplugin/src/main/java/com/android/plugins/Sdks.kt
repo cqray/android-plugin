@@ -114,10 +114,10 @@ open class Sdks : Plugin<Project> {
     private fun loadCoroutine(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isEnabled(options, configuration) { it?.coroutineEnabled }) {
-            project.dependencies.add("api", jetpack.ktxAndroid)
-            project.dependencies.add("api", jetpack.ktxLivedata)
-            project.dependencies.add("api", jetpack.ktxRuntime)
-            project.dependencies.add("api", jetpack.ktxViewModel)
+            project.dependencies.add("api", jetpack.coroutineAndroid)
+            project.dependencies.add("api", jetpack.coroutineLivedata)
+            project.dependencies.add("api", jetpack.coroutineRuntime)
+            project.dependencies.add("api", jetpack.coroutineViewModel)
         }
     }
 
@@ -130,9 +130,9 @@ open class Sdks : Plugin<Project> {
         val project = configuration.project
         if (isEnabled(options, configuration) { it?.lombokEnabled }) {
             println("========================加载了")
-            project.dependencies.add("compileOnly", Java.lombok)
-            project.dependencies.add("annotationProcessor", Java.lombok)
-            runCatching { project.dependencies.add("kapt", Java.lombok) }
+            project.dependencies.add("compileOnly", java.lombok)
+            project.dependencies.add("annotationProcessor", java.lombok)
+            runCatching { project.dependencies.add("kapt", java.lombok) }
         }
     }
 
@@ -148,7 +148,7 @@ open class Sdks : Plugin<Project> {
         if (isEnabled(options, configuration) { it?.retrofitEnabled }) {
             project.dependencies.add("api", http.retrofit)
             project.dependencies.add("api", http.retrofitGsonConverter)
-            project.dependencies.add("api", http.retrofitLogger)
+            project.dependencies.add("api", http.okHttp3Log)
             if (rxjava2Enabled) project.dependencies.add("api", http.retrofitRx2Adapter)
             if (rxjava3Enabled) project.dependencies.add("api", http.retrofitRx3Adapter)
         }
@@ -211,9 +211,9 @@ open class Sdks : Plugin<Project> {
     private fun loadService(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isEnabled(options, configuration) { it?.serviceEnabled }) {
-            project.dependencies.add("api", Java.autoService)
-            project.dependencies.add("annotationProcessor", Java.autoService)
-            runCatching { project.dependencies.add("kapt", Java.autoService) }
+            project.dependencies.add("api", java.autoService)
+            project.dependencies.add("annotationProcessor", java.autoService)
+            runCatching { project.dependencies.add("kapt", java.autoService) }
         }
     }
 
@@ -256,7 +256,7 @@ open class Sdks : Plugin<Project> {
         val cqray = Cqray()
 
         /** Java第三方依赖 **/
-        val java = Java
+        val java = Java()
 
         /** Jetpack组件库 **/
         @JvmField
@@ -274,6 +274,11 @@ open class Sdks : Plugin<Project> {
         /** 控件相关第三方依赖 **/
         val view = View()
 
-        val http = Http
+        /** 网络请求依赖 **/
+        val http = Http()
+
+        val mlkit30 = MLKit(30)
+        val mlkit31 = MLKit(31)
+        val mlkit33 = MLKit(33)
     }
 }

@@ -7,7 +7,8 @@ object Common {
     const val componentVersion = "v1.9.2.1-androidx-java8"
     /** Retrofit网络请求 **/
     const val retrofitVersion = "2.9.0"
-    
+
+    /** 安卓设备唯一标识解决方案 **///https://github.com/gzu-liyujiang/Android_CN_OAID
     val androidId = "com.github.gzu-liyujiang:Android_CN_OAID:4.2.4"
 
     // 组件化框架  https://github.com/xiaojinzi123/Component

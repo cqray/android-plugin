@@ -1,14 +1,21 @@
 package com.android.plugins.dependency
 
-class MLKit(private val apiVersion: Int) {
+import com.android.plugins.util.VersionUtils
 
-    private val version: String
-        get() {
-            if (apiVersion <= 30) return "1.0.3"
-            if (apiVersion < 33) return "1.1.0"
-            if (apiVersion >= 33) return "1.4.0"
-            return "1.0.3"
-        }
+/**
+ * MLKit框架集合
+ * @author Cqray
+ */
+@Suppress("Unused")
+class MLKit(targetSdkVersion: Int) {
+
+    /** 根据目标版本获取依赖对应版本 **/
+    private val version = VersionUtils.createDepVersion(
+        targetSdkVersion,
+        versionLte30 = "1.0.3",
+        versionEq31 = "1.1.0",
+        versionEq33 = "1.4.0"
+    )
 
     /** Camera核心 (*必须) **/// https://github.com/jenly1314/MLKit
     val cameraCore get() = "com.github.jenly1314.MLKit:mlkit-camera-core:$version"

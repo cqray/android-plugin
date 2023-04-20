@@ -1,4 +1,4 @@
-//import com.android.plugins.Sdks
+import com.android.plugins.Sdks2
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.android.plugins'
@@ -13,7 +13,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -42,6 +41,7 @@ pluginOptions {
 
 //    coroutineEnabled true
     lombokEnabled true
+//    butterKnifeEnabled true
 }
 
 
@@ -58,4 +58,6 @@ dependencies {
 //    api Sdks.jetpack.coroutinesViewModel
     api "androidx.room:room-runtime:2.3.0"
 
+
+//    api Sdks2.jetpack30.coroutineAndroid
 }

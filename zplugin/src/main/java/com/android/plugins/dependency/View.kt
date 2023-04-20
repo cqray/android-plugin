@@ -29,6 +29,7 @@ open class View {
     /** ButterKnife快速布局 **///https://github.com/JakeWharton/butterknife
     val butterKnife = "com.jakewharton:butterknife:${Version.butterKnife}"
     val butterKnifeCompiler = "com.jakewharton:butterknife-compiler:${Version.butterKnife}"
+    val butterKnifeClasspath = "com.jakewharton:butterknife-gradle-plugin:${Version.butterKnife}"
 
     val material = "com.google.android.material:material:1.3.0"
     val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"

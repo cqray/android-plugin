@@ -30,6 +30,9 @@ open class Sdks : Plugin<Project> {
             return null
         }
 
+    /** Application的数量 **/
+    private val applicationCount: Int by lazy { buildGradleConfigs.filter { it.value.isApplication }.size }
+
     override fun apply(project: Project) {
         // 获取项目的一些配置信息
         GradleBuildConfiguration().let {
@@ -100,9 +103,9 @@ open class Sdks : Plugin<Project> {
     private fun loadButterKnife(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isEnabled(options, configuration) { it?.butterKnifeEnabled }) {
-            project.dependencies.add("api", View().butterKnife)
-            project.dependencies.add("annotationProcessor", View().butterKnifeCompiler)
-            runCatching { project.dependencies.add("kapt", View().butterKnifeCompiler) }
+            project.dependencies.add("api", view.butterKnife)
+            project.dependencies.add("annotationProcessor", view.butterKnifeCompiler)
+            runCatching { project.dependencies.add("kapt", view.butterKnifeCompiler) }
         }
     }
 
@@ -114,10 +117,10 @@ open class Sdks : Plugin<Project> {
     private fun loadCoroutine(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isEnabled(options, configuration) { it?.coroutineEnabled }) {
-            project.dependencies.add("api", jetpack.coroutineAndroid)
-            project.dependencies.add("api", jetpack.coroutineLivedata)
-            project.dependencies.add("api", jetpack.coroutineRuntime)
-            project.dependencies.add("api", jetpack.coroutineViewModel)
+            project.dependencies.add("api", jetpack30.coroutineAndroid)
+            project.dependencies.add("api", jetpack30.coroutineLivedata)
+            project.dependencies.add("api", jetpack30.coroutineRuntime)
+            project.dependencies.add("api", jetpack30.coroutineViewModel)
         }
     }
 
@@ -165,15 +168,15 @@ open class Sdks : Plugin<Project> {
         val rxjava3Enabled = isEnabled(options, configuration) { it?.rxjava3Enabled }
         val coroutineEnabled = isEnabled(options, configuration) { it?.coroutineEnabled }
         if (isEnabled(options, configuration) { it?.roomEnabled }) {
-            project.dependencies.add("api", jetpack.roomRuntime)
-            project.dependencies.add("annotationProcessor", jetpack.roomCompiler)
-            runCatching { project.dependencies.add("kapt", jetpack.roomCompiler) }
+            project.dependencies.add("api", jetpack30.roomRuntime)
+            project.dependencies.add("annotationProcessor", jetpack30.roomCompiler)
+            runCatching { project.dependencies.add("kapt", jetpack30.roomCompiler) }
             // 启用rxjava2
-            if (rxjava2Enabled) project.dependencies.add("api", jetpack.roomRxjava2)
+            if (rxjava2Enabled) project.dependencies.add("api", jetpack30.roomRxjava2)
             // 启用rxjava3
-            if (rxjava3Enabled) project.dependencies.add("api", jetpack.roomRxjava3)
+            if (rxjava3Enabled) project.dependencies.add("api", jetpack30.roomRxjava3)
             // 启用协程
-            if (coroutineEnabled) project.dependencies.add("api", jetpack.roomCoroutine)
+            if (coroutineEnabled) project.dependencies.add("api", jetpack30.roomCoroutine)
         }
     }
 
@@ -258,9 +261,11 @@ open class Sdks : Plugin<Project> {
         /** Java第三方依赖 **/
         val java = Java()
 
-        /** Jetpack组件库 **/
         @JvmField
-        val jetpack = JetPack()
+        val jetpack30 = JetPack(30)
+
+        @JvmField
+        val jetpack31 = JetPack(31)
 
         /** 选择器第三方依赖 **/
         val picker = Picker()
@@ -277,8 +282,13 @@ open class Sdks : Plugin<Project> {
         /** 网络请求依赖 **/
         val http = Http()
 
+        @JvmField
         val mlkit30 = MLKit(30)
+
+        @JvmField
         val mlkit31 = MLKit(31)
+
+        @JvmField
         val mlkit33 = MLKit(33)
     }
 }

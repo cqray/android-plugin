@@ -112,7 +112,7 @@ open class View {
     /** https://github.com/ailiwean/NBZxing 【NBZxing扫码库】*///https://github.com/ailiwean/NBZxing
     var zxingNb = "com.github.ailiwean:NBZxing:0.2.5"
 
-    /** 灰度算法增强库 **///https://github.com/ailiwean/NBZxing-Scale
+    /** https://github.com/ailiwean/NBZxing-Scale   【NBZxing灰度算法增强库】 **///https://github.com/ailiwean/NBZxing-Scale
     var zxingNbScale = "com.github.ailiwean:NBZxing-Scale:0.0.6"
 
     /** 数字进度条 **///https://github.com/daimajia/NumberProgressBar

@@ -36,11 +36,20 @@ object Sdks2 {
     val http = Http()
 
     @JvmField
-    val mlkit30 = MLKit(30)
+    val mlKit30 = MLKit(30)
 
     @JvmField
-    val mlkit31 = MLKit(31)
+    val mlKit31 = MLKit(31)
 
     @JvmField
-    val mlkit33 = MLKit(33)
+    val mlKit33 = MLKit(33)
+
+    @JvmField
+    val zxing30 = Zxing(30)
+
+    @JvmField
+    val zxing31 = Zxing(31)
+
+    @JvmField
+    val zxing33 = Zxing(33)
 }

@@ -60,4 +60,5 @@ dependencies {
 
 
 //    api Sdks2.jetpack30.coroutineAndroid
+    api Sdks2.view.zxingLite
 }

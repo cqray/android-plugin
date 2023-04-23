@@ -1,12 +1,8 @@
 package com.android.plugins.dependency
 
 @Suppress("UNUSED")
-object Common {
+class Common {
 
-    /** 组件化 **/
-    const val componentVersion = "v1.9.2.1-androidx-java8"
-    /** Retrofit网络请求 **/
-    const val retrofitVersion = "2.9.0"
 
     /** 安卓设备唯一标识解决方案 **///https://github.com/gzu-liyujiang/Android_CN_OAID
     val androidId = "com.github.gzu-liyujiang:Android_CN_OAID:4.2.4"
@@ -17,8 +13,10 @@ object Common {
 
     /** 缓存管理 **///https://github.com/ronghao/CacheManage
     val cacheManage = "com.github.ronghao:CacheManage:1.3.5"
+
     /** 图片控件 **///https://github.com/PhilJay/MPAndroidChart
     val mpChart = "com.github.PhilJay:MPAndroidChart:v3.1.0"
+
     /** 多Dex **/
     val multiDex = "androidx.multidex:multidex:2.0.1"
 
@@ -31,23 +29,48 @@ object Common {
 
     // Gson https://github.com/google/gson
     val gson = "com.google.code.gson:gson:2.8.8"
-    /** 事件总线 **///https://github.com/JeremyLiao/LiveEventBus
-    val eventBus = "io.github.jeremyliao:live-event-bus-x:1.8.0"
+
     /** 权限请求 **///https://github.com/getActivity/XXPermissions
     val permission = "com.github.getActivity:XXPermissions:15.0"
 
-    /** Popup弹窗 **///https://github.com/li-xiaojun/XPopup
-    val popup = "com.github.li-xiaojun:XPopup:2.8.3"
-    /** Popup弹窗扩展 **///https://github.com/li-xiaojun/XPopupExt
-    val popupExt = "com.github.li-xiaojun:XPopupExt:0.0.9"
-    /** Popup痰喘内部框架 **///https://github.com/li-xiaojun/EasyAdapter
-    val popupFix = "com.github.li-xiaojun:EasyAdapter:1.2.5"
+    /** https://github.com/JeremyLiao/LiveEventBus  【事件总线】 **///https://github.com/JeremyLiao/LiveEventBus
+    val liveEventBus = "io.github.jeremyliao:live-event-bus-x:1.8.0"
 
-    /** Toast弹窗 **///https://github.com/getActivity/ToastUtils
-    val toastUtils = "com.github.getActivity:ToastUtils:10.5"
-    /** Toast悬浮弹窗 **///https://github.com/getActivity/XToast
-    val toastX = "com.github.getActivity:XToast:8.5"
+    /** https://github.com/getActivity/ToastUtils   【Toast弹窗】 **///https://github.com/getActivity/ToastUtils
+    val toastUtils = "com.github.getActivity:ToastUtils:12.2"
+
+    /** https://github.com/getActivity/XToast   【Toast悬浮弹窗】 **///https://github.com/getActivity/XToast
+    val toastX = "com.github.getActivity:XToast:8.9"
 
     /** Android工具类代码 **///https://github.com/Blankj/AndroidUtilCode
     val utilCode = "com.blankj:utilcodex:1.31.0"
+
+    /** https://github.com/li-xiaojun/XPopup    【Popup弹窗】 **///https://github.com/li-xiaojun/XPopup
+    val popup = "com.github.li-xiaojun:XPopup:2.9.19"
+
+    /** https://github.com/li-xiaojun/XPopupExt 【Popup弹窗扩展】 **///https://github.com/li-xiaojun/XPopupExt
+    val popupExt = "com.github.li-xiaojun:XPopupExt:1.0.0"
+
+    /** https://github.com/li-xiaojun/EasyAdapter   【Popup弹窗内部适配器】 **///https://github.com/li-xiaojun/EasyAdapter
+    val popupAdapter = "com.github.li-xiaojun:EasyAdapter:1.2.9"
+
+    /** https://github.com/ReactiveX/RxJava 【RxJava2】 **///https://github.com/ReactiveX/RxJava
+    val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.21"
+
+    /** https://github.com/ReactiveX/RxJava 【RxJava3】 **///https://github.com/ReactiveX/RxJava
+    val rxjava3 = "io.reactivex.rxjava3:rxjava:3.1.6"
+
+    /** https://github.com/ReactiveX/RxAndroid  【RxAndroid2】 **///https://github.com/ReactiveX/RxAndroid
+    val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.1"
+
+    /** https://github.com/ReactiveX/RxAndroid  【RxAndroid3】 **///https://github.com/ReactiveX/RxAndroid
+    val rxandroid3 = "io.reactivex.rxjava3:rxandroid:3.0.2"
+
+    companion object {
+        /** 组件化 **/
+        const val componentVersion = "v1.9.2.1-androidx-java8"
+
+        /** Retrofit网络请求 **/
+        const val retrofitVersion = "2.9.0"
+    }
 }

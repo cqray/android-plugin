@@ -58,7 +58,7 @@ dependencies {
 
 //    api Sdks.jetpack.coroutinesViewModel
     api "androidx.room:room-runtime:2.3.0"
-
+    api "androidx.recyclerview:recyclerview:1.3.0"
 
 ////    api Sdks2.jetpack30.coroutineAndroid
     api Sdks2.jetpack30.coroutineAndroid

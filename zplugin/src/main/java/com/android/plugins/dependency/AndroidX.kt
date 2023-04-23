@@ -6,6 +6,7 @@ import com.android.plugins.util.VersionUtils
  * AndroidX相关框架
  * @author LeiJue
  */
+@Suppress("Unused")
 class AndroidX(targetSdkVersion: Int) {
 
     private val appcompatVersion = VersionUtils.createDepVersion(

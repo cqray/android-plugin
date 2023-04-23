@@ -6,8 +6,6 @@ import com.android.plugins.dependency.*
 import com.android.plugins.configuration.GradlePropertyConfiguration
 import com.android.plugins.options.ModuleOptions
 import com.android.plugins.options.PluginOptions
-import com.google.gson.Gson
-//import com.android.plugins.options.PluginOptions
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -111,9 +109,9 @@ open class Sdks : Plugin<Project> {
     private fun loadButterKnife(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(options, configuration) { it?.butterKnifeEnabled }) {
-            project.dependencies.add("api", view.butterKnife)
-            project.dependencies.add("annotationProcessor", view.butterKnifeCompiler)
-            runCatching { project.dependencies.add("kapt", view.butterKnifeCompiler) }
+            project.dependencies.add("api", Sdks2.view.butterKnife)
+            project.dependencies.add("annotationProcessor", Sdks2.view.butterKnifeCompiler)
+            runCatching { project.dependencies.add("kapt", Sdks2.view.butterKnifeCompiler) }
         }
     }
 
@@ -125,10 +123,10 @@ open class Sdks : Plugin<Project> {
     private fun loadCoroutine(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(options, configuration) { it?.coroutineEnabled }) {
-            project.dependencies.add("api", jetpack30.coroutineAndroid)
-            project.dependencies.add("api", jetpack30.coroutineLivedata)
-            project.dependencies.add("api", jetpack30.coroutineRuntime)
-            project.dependencies.add("api", jetpack30.coroutineViewModel)
+            project.dependencies.add("api", Sdks2.androidx.coroutineAndroid)
+            project.dependencies.add("api", Sdks2.androidx.lifecycleLivedataKtx)
+            project.dependencies.add("api", Sdks2.androidx.lifecycleRuntimeKtx)
+            project.dependencies.add("api", Sdks2.androidx.lifecycleViewModelKtx)
         }
     }
 
@@ -141,9 +139,9 @@ open class Sdks : Plugin<Project> {
         val project = configuration.project
         if (isSdkEnabled(options, configuration) { it?.lombokEnabled }) {
             println("========================加载了")
-            project.dependencies.add("compileOnly", java.lombok)
-            project.dependencies.add("annotationProcessor", java.lombok)
-            runCatching { project.dependencies.add("kapt", java.lombok) }
+            project.dependencies.add("compileOnly", Sdks2.java.lombok)
+            project.dependencies.add("annotationProcessor", Sdks2.java.lombok)
+            runCatching { project.dependencies.add("kapt", Sdks2.java.lombok) }
         }
     }
 
@@ -157,11 +155,11 @@ open class Sdks : Plugin<Project> {
         val rxjava2Enabled = isSdkEnabled(options, configuration) { it?.rxjava2Enabled }
         val rxjava3Enabled = isSdkEnabled(options, configuration) { it?.rxjava3Enabled }
         if (isSdkEnabled(options, configuration) { it?.retrofitEnabled }) {
-            project.dependencies.add("api", http.retrofit)
-            project.dependencies.add("api", http.retrofitGsonConverter)
-            project.dependencies.add("api", http.okHttp3Log)
-            if (rxjava2Enabled) project.dependencies.add("api", http.retrofitRx2Adapter)
-            if (rxjava3Enabled) project.dependencies.add("api", http.retrofitRx3Adapter)
+            project.dependencies.add("api", Sdks2.http.retrofit)
+            project.dependencies.add("api", Sdks2.http.retrofitGsonConverter)
+            project.dependencies.add("api", Sdks2.http.okHttp3Log)
+            if (rxjava2Enabled) project.dependencies.add("api", Sdks2.http.retrofitRx2Adapter)
+            if (rxjava3Enabled) project.dependencies.add("api", Sdks2.http.retrofitRx3Adapter)
         }
     }
 
@@ -176,15 +174,15 @@ open class Sdks : Plugin<Project> {
         val rxjava3Enabled = isSdkEnabled(options, configuration) { it?.rxjava3Enabled }
         val coroutineEnabled = isSdkEnabled(options, configuration) { it?.coroutineEnabled }
         if (isSdkEnabled(options, configuration) { it?.roomEnabled }) {
-            project.dependencies.add("api", jetpack30.roomRuntime)
-            project.dependencies.add("annotationProcessor", jetpack30.roomCompiler)
-            runCatching { project.dependencies.add("kapt", jetpack30.roomCompiler) }
+            project.dependencies.add("api", Sdks2.androidx.roomRuntime)
+            project.dependencies.add("annotationProcessor", Sdks2.androidx.roomCompiler)
+            runCatching { project.dependencies.add("kapt", Sdks2.androidx.roomCompiler) }
             // 启用rxjava2
-            if (rxjava2Enabled) project.dependencies.add("api", jetpack30.roomRxjava2)
+            if (rxjava2Enabled) project.dependencies.add("api", Sdks2.androidx.roomRxjava2)
             // 启用rxjava3
-            if (rxjava3Enabled) project.dependencies.add("api", jetpack30.roomRxjava3)
+            if (rxjava3Enabled) project.dependencies.add("api", Sdks2.androidx.roomRxjava3)
             // 启用协程
-            if (coroutineEnabled) project.dependencies.add("api", jetpack30.roomCoroutine)
+            if (coroutineEnabled) project.dependencies.add("api", Sdks2.androidx.roomCoroutine)
         }
     }
 
@@ -196,8 +194,8 @@ open class Sdks : Plugin<Project> {
     private fun loadRxjava2(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(options, configuration) { it?.rxjava2Enabled }) {
-            project.dependencies.add("api", rx.java2)
-            project.dependencies.add("api", rx.android2)
+            project.dependencies.add("api", Sdks2.rx.java2)
+            project.dependencies.add("api", Sdks2.rx.android2)
         }
     }
 
@@ -209,8 +207,8 @@ open class Sdks : Plugin<Project> {
     private fun loadRxjava3(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(options, configuration) { it?.rxjava3Enabled }) {
-            project.dependencies.add("api", rx.java3)
-            project.dependencies.add("api", rx.android3)
+            project.dependencies.add("api", Sdks2.rx.java3)
+            project.dependencies.add("api", Sdks2.rx.android3)
         }
     }
 
@@ -222,9 +220,9 @@ open class Sdks : Plugin<Project> {
     private fun loadService(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(options, configuration) { it?.serviceEnabled }) {
-            project.dependencies.add("api", java.autoService)
-            project.dependencies.add("annotationProcessor", java.autoService)
-            runCatching { project.dependencies.add("kapt", java.autoService) }
+            project.dependencies.add("api", Sdks2.java.autoService)
+            project.dependencies.add("annotationProcessor", Sdks2.java.autoService)
+            runCatching { project.dependencies.add("kapt", Sdks2.java.autoService) }
         }
     }
 
@@ -267,45 +265,5 @@ open class Sdks : Plugin<Project> {
         return buildGradleConfigs.values.find { it.isApplication }!!.android.targetSdkVersion
     }
 
-    companion object {
-        /** 常用第三方依赖 **/
-        @JvmField
-        val common = Common
 
-        /** Cqray下第三方依赖 **/
-        val cqray = Cqray()
-
-        /** Java第三方依赖 **/
-        val java = Java()
-
-        @JvmField
-        val jetpack30 = JetPack(30)
-
-        @JvmField
-        val jetpack31 = JetPack(31)
-
-        /** 选择器第三方依赖 **/
-        val picker = Picker()
-
-        /** 图片相关第三方依赖 **/
-        val picture = Picture
-
-        /** RxJava系列框架 **/
-        val rx = Rx()
-
-        /** 控件相关第三方依赖 **/
-        val view = View()
-
-        /** 网络请求依赖 **/
-        val http = Http()
-
-        @JvmField
-        val mlkit30 = MLKit(30)
-
-        @JvmField
-        val mlkit31 = MLKit(31)
-
-        @JvmField
-        val mlkit33 = MLKit(33)
-    }
 }

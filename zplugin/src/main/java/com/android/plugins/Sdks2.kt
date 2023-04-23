@@ -14,6 +14,10 @@ object Sdks2 {
     @JvmField
     val common = Common
 
+    /** 各种图标库 **/
+    @JvmField
+    val chart = Chart()
+
     /** Cqray下第三方依赖 **/
     val cqray = Cqray()
 

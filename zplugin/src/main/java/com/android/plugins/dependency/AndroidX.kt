@@ -59,6 +59,8 @@ class AndroidX(targetSdkVersion: Int) {
     val lifecycleRuntimeKtx get() = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     val lifecycleLivedataKtx get() = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
 
+    val recyclerView get() = "androidx.recyclerview:recyclerview:1.2.1"
+
     /// Room数据库
     val roomRxjava3 get() = "androidx.room:room-rxjava3:$roomVersion"
     val roomRxjava2 get() = "androidx.room:room-rxjava2:$roomVersion"

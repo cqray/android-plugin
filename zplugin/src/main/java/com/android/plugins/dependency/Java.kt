@@ -40,6 +40,7 @@ open class Java {
     /** https://github.com/ReactiveX/RxJava 【RxJava3】 **///https://github.com/ReactiveX/RxJava
     val java3 = "io.reactivex.rxjava3:rxjava:3.1.6"
 
+
     companion object {
 //        /** 日志 **/
 //        private const val loggerVersion = "2.2.0"

@@ -6,6 +6,7 @@ import com.android.plugins.dependency.*
 import com.android.plugins.configuration.GradlePropertyConfiguration
 import com.android.plugins.options.ModuleOptions
 import com.android.plugins.options.PluginOptions
+import com.google.gson.Gson
 //import com.android.plugins.options.PluginOptions
 
 import org.gradle.api.Plugin
@@ -49,6 +50,7 @@ open class Sdks : Plugin<Project> {
             // 解析build.gradle文件，并获取其中的某些配置信息
             buildGradleConfigs[it.key] = GradleBuildConfiguration().also { f -> f.parse(it.value) }
         }
+
         // 遍历加载依赖
         buildGradleConfigs.forEach {
             val configuration = it.value
@@ -59,6 +61,12 @@ open class Sdks : Plugin<Project> {
             val extensionName = StrUtil.lowerFirst(aClass.simpleName)
             // 创建扩展
             configuration.project.extensions.create(extensionName, aClass)
+
+//            println(configuration.project.rootProject.name)
+            configuration.project.rootProject.extensions.create(extensionName, aClass)
+
+//            val temp = configuration.project.rootProject.extensions.getByName("ext")
+//            println("==============" + Gson().toJson(temp))
             // 不是入口模块，则引用插件
             if (!isApplication) configuration.project.plugins.apply("com.android.plugins")
             // 加载依赖
@@ -102,7 +110,7 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadButterKnife(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        if (isEnabled(options, configuration) { it?.butterKnifeEnabled }) {
+        if (isSdkEnabled(options, configuration) { it?.butterKnifeEnabled }) {
             project.dependencies.add("api", view.butterKnife)
             project.dependencies.add("annotationProcessor", view.butterKnifeCompiler)
             runCatching { project.dependencies.add("kapt", view.butterKnifeCompiler) }
@@ -116,7 +124,7 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadCoroutine(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        if (isEnabled(options, configuration) { it?.coroutineEnabled }) {
+        if (isSdkEnabled(options, configuration) { it?.coroutineEnabled }) {
             project.dependencies.add("api", jetpack30.coroutineAndroid)
             project.dependencies.add("api", jetpack30.coroutineLivedata)
             project.dependencies.add("api", jetpack30.coroutineRuntime)
@@ -131,7 +139,7 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadLombok(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        if (isEnabled(options, configuration) { it?.lombokEnabled }) {
+        if (isSdkEnabled(options, configuration) { it?.lombokEnabled }) {
             println("========================加载了")
             project.dependencies.add("compileOnly", java.lombok)
             project.dependencies.add("annotationProcessor", java.lombok)
@@ -146,9 +154,9 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadRetrofit(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        val rxjava2Enabled = isEnabled(options, configuration) { it?.rxjava2Enabled }
-        val rxjava3Enabled = isEnabled(options, configuration) { it?.rxjava3Enabled }
-        if (isEnabled(options, configuration) { it?.retrofitEnabled }) {
+        val rxjava2Enabled = isSdkEnabled(options, configuration) { it?.rxjava2Enabled }
+        val rxjava3Enabled = isSdkEnabled(options, configuration) { it?.rxjava3Enabled }
+        if (isSdkEnabled(options, configuration) { it?.retrofitEnabled }) {
             project.dependencies.add("api", http.retrofit)
             project.dependencies.add("api", http.retrofitGsonConverter)
             project.dependencies.add("api", http.okHttp3Log)
@@ -164,10 +172,10 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadRoom(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        val rxjava2Enabled = isEnabled(options, configuration) { it?.rxjava2Enabled }
-        val rxjava3Enabled = isEnabled(options, configuration) { it?.rxjava3Enabled }
-        val coroutineEnabled = isEnabled(options, configuration) { it?.coroutineEnabled }
-        if (isEnabled(options, configuration) { it?.roomEnabled }) {
+        val rxjava2Enabled = isSdkEnabled(options, configuration) { it?.rxjava2Enabled }
+        val rxjava3Enabled = isSdkEnabled(options, configuration) { it?.rxjava3Enabled }
+        val coroutineEnabled = isSdkEnabled(options, configuration) { it?.coroutineEnabled }
+        if (isSdkEnabled(options, configuration) { it?.roomEnabled }) {
             project.dependencies.add("api", jetpack30.roomRuntime)
             project.dependencies.add("annotationProcessor", jetpack30.roomCompiler)
             runCatching { project.dependencies.add("kapt", jetpack30.roomCompiler) }
@@ -187,7 +195,7 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadRxjava2(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        if (isEnabled(options, configuration) { it?.rxjava2Enabled }) {
+        if (isSdkEnabled(options, configuration) { it?.rxjava2Enabled }) {
             project.dependencies.add("api", rx.java2)
             project.dependencies.add("api", rx.android2)
         }
@@ -200,7 +208,7 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadRxjava3(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        if (isEnabled(options, configuration) { it?.rxjava3Enabled }) {
+        if (isSdkEnabled(options, configuration) { it?.rxjava3Enabled }) {
             project.dependencies.add("api", rx.java3)
             project.dependencies.add("api", rx.android3)
         }
@@ -213,7 +221,7 @@ open class Sdks : Plugin<Project> {
      */
     private fun loadService(options: PluginOptions?, configuration: GradleBuildConfiguration) {
         val project = configuration.project
-        if (isEnabled(options, configuration) { it?.serviceEnabled }) {
+        if (isSdkEnabled(options, configuration) { it?.serviceEnabled }) {
             project.dependencies.add("api", java.autoService)
             project.dependencies.add("annotationProcessor", java.autoService)
             runCatching { project.dependencies.add("kapt", java.autoService) }
@@ -226,7 +234,7 @@ open class Sdks : Plugin<Project> {
      * @param configuration build.gradle参数
      * @param func 属性获取
      */
-    private fun isEnabled(
+    private fun isSdkEnabled(
         options: PluginOptions?,
         configuration: GradleBuildConfiguration,
         func: Function1<ModuleOptions?, Boolean?>
@@ -240,14 +248,23 @@ open class Sdks : Plugin<Project> {
         val moduleOption = func.invoke(configuration.options) ?: false
         // 获取插件的选项
         val pluginOption = func.invoke(options) ?: false
-
-        println("${project.name}|$isOtherLibrary|$isCommonLibrary|$moduleOption$pluginOption")
         return when {
             isOtherLibrary -> moduleOption
             isCommonLibrary -> moduleOption || pluginOption
             configuration.isApplication -> pluginOption
             else -> false
         }
+    }
+
+    /**
+     * 获取目标SDK版本号
+     * @param configuration 所在模块配置
+     */
+    private fun getTargetSdkVersion(configuration: GradleBuildConfiguration): Int {
+        // Application模块数量不为1，则直接使用子模块的targetSdkVersion
+        if (applicationCount != 1) return configuration.android.targetSdkVersion
+        // 只有一个Application模块，则返回Application模块的targetSdkVersion
+        return buildGradleConfigs.values.find { it.isApplication }!!.android.targetSdkVersion
     }
 
     companion object {

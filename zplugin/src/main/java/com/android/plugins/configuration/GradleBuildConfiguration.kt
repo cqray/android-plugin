@@ -23,7 +23,7 @@ class GradleBuildConfiguration {
     lateinit var project: Project
         private set
 
-    var android: Android? = null
+    lateinit var android: Android
 
     /** 从文件中读取的选项信息 **/
     lateinit var options: ModuleOptions
@@ -64,7 +64,7 @@ class GradleBuildConfiguration {
     }
 
     private fun parseAndroid(lines: List<String>) {
-        val android = Android()
+        android = Android()
         // 属性集1
         findAndErgodic(lines, "android") {
             setObjectField(android, it, "compileSdkVersion", Int::class.java)
@@ -79,8 +79,8 @@ class GradleBuildConfiguration {
             setObjectField(android, it, "applicationId", String::class.java)
             setObjectField(android, it, "multiDexEnabled", Boolean::class.java)
         }
-        // 获取到了VersionName字段，说明有android代码块
-        if (android.versionName.isNotEmpty()) this.android = android
+//        // 获取到了VersionName字段，说明有android代码块
+//        if (android.versionName.isNotEmpty()) this.android = android
     }
 
     private fun parseModuleOptions(lines: List<String>) {

@@ -33,6 +33,7 @@ object Sdks2 {
     val view = View()
 
     /** 网络请求依赖 **/
+    @JvmField
     val http = Http()
 
     @JvmField

@@ -14,7 +14,7 @@ object Sdks2 {
     @JvmField
     val common = Common
 
-    /** 各种图标库 **/
+    /** 各种图表库 **/
     @JvmField
     val chart = Chart()
 

@@ -176,6 +176,12 @@ class View {
     /** 数字进度条 **///https://github.com/daimajia/NumberProgressBar
     var numberProgress = "com.daimajia.numberprogressbar:library:1.4@aar"
 
+
+
+    //========================================================
+    //====================滑动条相关框架部分====================
+    //========================================================
+
     /** https://github.com/Jay-Goo/RangeSeekBar 【范围滑动条】 **///https://github.com/Jay-Goo/RangeSeekBar
     val seekbarRange = "com.github.Jay-Goo:RangeSeekBar:v3.0.0"
 
@@ -184,6 +190,9 @@ class View {
 
     /** https://github.com/woxingxiao/BubbleSeekBar 【气泡滑动条，精简版】 **///https://github.com/woxingxiao/BubbleSeekBar
     val seekbarBubbleLite = "com.xw.repo:bubbleseekbar:3.20-lite"
+
+    /** https://github.com/Chrisvin/RubberPicker    【橡皮滑动条】**///https://github.com/Chrisvin/RubberPicker
+    val seekbarRubber = "com.github.Chrisvin:RubberPicker:v1.5"
 
     /** https://github.com/zhanghai/MaterialRatingBar   【评分控件】 **///https://github.com/zhanghai/MaterialRatingBar
     val ratingbarMaterial ="me.zhanghai.android.materialratingbar:library:1.4.0"

@@ -9,6 +9,7 @@ object Sdks {
 
     @JvmField
     val androidx31 = AndroidX(31)
+
     /** 各种图表库 **/
     @JvmField
     val chart = Chart()
@@ -18,12 +19,6 @@ object Sdks {
 
     /** Java第三方依赖 **/
     val java = Java()
-
-    /** 选择器第三方依赖 **/
-    val picker = Picker()
-
-//    /** 图片相关第三方依赖 **/
-//    val picture = Picture
 
     /** RxJava系列框架 **/
     val rx = Rx()
@@ -43,6 +38,10 @@ object Sdks {
     /** MLKit依赖集合（api33） **/
     @JvmField
     val mlKit33 = MLKit(33)
+
+    /** 选择器 **/
+    @JvmField
+    val picker = Picker()
 
     /** 弹窗、提示类框架集合 **/
     @JvmField

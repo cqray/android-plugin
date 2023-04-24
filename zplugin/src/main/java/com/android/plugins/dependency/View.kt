@@ -75,12 +75,6 @@ class View {
     /** 数字进度条 **///https://github.com/daimajia/NumberProgressBar
     var numberProgress = "com.daimajia.numberprogressbar:library:1.4@aar"
 
-    /** 列表控件 **/
-    val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
-
-    /** 列表控件 **/
-    val recyclerView31 = "androidx.recyclerview:recyclerview:1.3.0"
-
     /** https://github.com/CymChad/BaseRecyclerViewAdapterHelper    【基础适配器】 **/// https://github.com/CymChad/BaseRecyclerViewAdapterHelper
     val recyclerViewBaseAdapter = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7"
 

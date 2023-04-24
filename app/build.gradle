@@ -61,7 +61,7 @@ dependencies {
 //    api "com.geyifeng.immersionbar:immersionbar:3.2.2"
 //    implementation 'com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx'
 //    implementation 'io.github.azhon:appupdate:3.0.7'
-        api "com.github.ome450901:SimpleRatingBar:1.5.1"
+    api "com.github.ome450901:SimpleRatingBar:1.5.1"
 //    api Sdks.jetpack.coroutinesViewModel
     api "androidx.room:room-runtime:2.3.0"
     api "androidx.recyclerview:recyclerview:1.2.1"
@@ -90,6 +90,8 @@ dependencies {
     implementation "io.karn:notify:1.4.0"
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-    compile 'me.codeboy.android:align-text-view:2.3.2'
-    implementation 'com.github.rosenpin:fading-text-view:3.0'
+//    compile 'me.codeboy.android:align-text-view:2.3.2'
+//    implementation 'com.github.rosenpin:fading-text-view:3.0'
+    implementation 'com.github.Vove7:Android-Accessibility-Api:3.0.3'
+
 }

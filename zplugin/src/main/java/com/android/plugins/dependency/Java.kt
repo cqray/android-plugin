@@ -10,6 +10,9 @@ open class Java {
     /** 组件化框架 **///
     val autoService = "com.google.auto.service:auto-service:1.0.1"
 
+    /** https://github.com/jiusetian/EasySocket 【Socket连接框架】**///https://github.com/jiusetian/EasySocket
+    val easySocket = "com.github.jiusetian:EasySocket:v2.1.1"
+
     /** https://github.com/google/gson  【Json格式转换】**///https://github.com/google/gson
     val gson = "com.google.code.gson:gson:2.10.1"
 

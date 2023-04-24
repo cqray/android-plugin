@@ -4,11 +4,14 @@ package com.android.plugins.dependency
  * 网络请求依赖
  * @author Cqray
  */
-@Suppress(
-    "MemberVisibilityCanBePrivate",
-    "Unused"
-)
+@Suppress("Unused")
 class Http {
+
+    /** OkHttp3版本 **/
+    private val okHttp3Version = "4.10.0"
+
+    /** Retrofit版本 **/
+    private val retrofitVersion = "2.9.0"
 
     /** https://github.com/square/okhttp    【OkHttp3网络请求库】 **///https://github.com/square/okhttp
     val okHttp3 = "com.squareup.okhttp3:okhttp:$okHttp3Version"
@@ -27,12 +30,4 @@ class Http {
 
     /** https://github.com/square/retrofit  【Retrofit网络请求库】 **///https://github.com/square/retrofit
     val retrofitRx2Adapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-
-    private companion object {
-        /** OkHttp3版本 **/
-        const val okHttp3Version = "4.10.0"
-
-        /** Retrofit版本 **/
-        const val retrofitVersion = "2.9.0"
-    }
 }

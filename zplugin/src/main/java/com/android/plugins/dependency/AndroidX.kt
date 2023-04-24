@@ -42,6 +42,13 @@ class AndroidX(targetSdkVersion: Int) {
         versionEq31 = "2.5.1"
     )
 
+    /** Room数据库 **/
+    private val recyclerViewVersion = VersionUtils.createDepVersion(
+        targetSdkVersion,
+        versionLte30 = "1.2.1",
+        versionEq31 = "1.3.0"
+    )
+
     /// Appcompat库
     val appcompat get() = "androidx.appcompat:appcompat:$appcompatVersion"
     val appcompatResources get() = "androidx.appcompat:appcompat-resources:$appcompatVersion"
@@ -59,7 +66,7 @@ class AndroidX(targetSdkVersion: Int) {
     val lifecycleRuntimeKtx get() = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     val lifecycleLivedataKtx get() = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
 
-    val recyclerView get() = "androidx.recyclerview:recyclerview:1.2.1"
+    val recyclerView get() = "androidx.recyclerview:recyclerview:$recyclerViewVersion"
 
     /// Room数据库
     val roomRxjava3 get() = "androidx.room:room-rxjava3:$roomVersion"
@@ -69,6 +76,6 @@ class AndroidX(targetSdkVersion: Int) {
     val roomCompiler get() = "androidx.room:room-compiler:$roomVersion"
 
     /// 协程依赖
-    val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
 }

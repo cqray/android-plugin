@@ -192,27 +192,4 @@ class View {
 
     /** https://github.com/FlyingPumba/SimpleRatingBar  【评分控件】 **///https://github.com/FlyingPumba/SimpleRatingBar
     val ratingbarSimple2 = "com.iarcuschin:simpleratingbar:0.1.5"
-
-    //========================================================
-    //=================弹窗、提示类相关框架部分==================
-    //========================================================
-
-    /** https://github.com/li-xiaojun/XPopup    【Popup弹窗】 **///https://github.com/li-xiaojun/XPopup
-    val popup = "com.github.li-xiaojun:XPopup:2.9.19"
-
-    /** https://github.com/li-xiaojun/XPopupExt 【Popup弹窗扩展】 **///https://github.com/li-xiaojun/XPopupExt
-    val popupExt = "com.github.li-xiaojun:XPopupExt:1.0.0"
-
-    /** https://github.com/li-xiaojun/EasyAdapter   【Popup弹窗内部适配器】 **///https://github.com/li-xiaojun/EasyAdapter
-    val popupAdapter = "com.github.li-xiaojun:EasyAdapter:1.2.9"
-
-    /** https://github.com/getActivity/ToastUtils   【Toast弹窗】 **///https://github.com/getActivity/ToastUtils
-    val toastUtils = "com.github.getActivity:ToastUtils:12.2"
-
-    /** https://github.com/getActivity/XToast   【Toast悬浮弹窗】 **///https://github.com/getActivity/XToast
-    val toastX = "com.github.getActivity:XToast:8.9"
-
-    /** https://github.com/sephiroth74/android-target-tooltip   【工具提示窗】 **///https://github.com/sephiroth74/android-target-tooltip
-    val tooltip = "it.sephiroth.android.library.targettooltip:target-tooltip-library:2.0.5"
-
 }

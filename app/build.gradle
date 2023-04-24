@@ -1,7 +1,8 @@
-import com.android.plugins.Sdks2
+import com.android.plugins.Sdks
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.android.plugins'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -9,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.cqset.demo.build"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -83,4 +84,12 @@ dependencies {
 
 
 //    implementation "io.github.architshah248.calendar:awesome-calendar:2.0.0"
+
+//    implementation "com.github.Petterpx:FloatingX:1.2.4"
+
+    implementation "io.karn:notify:1.4.0"
+//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    compile 'me.codeboy.android:align-text-view:2.3.2'
+    implementation 'com.github.rosenpin:fading-text-view:3.0'
 }

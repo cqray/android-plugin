@@ -4,7 +4,7 @@ package com.android.plugins
  * Android版本配置信息
  * @author LeiJue
  */
-@Suppress("UNUSED")
+@Suppress("Unused")
 class Android {
     /** 应用ID **/
     var applicationId = ""

@@ -27,8 +27,8 @@ object Sdks2 {
     /** 选择器第三方依赖 **/
     val picker = Picker()
 
-    /** 图片相关第三方依赖 **/
-    val picture = Picture
+//    /** 图片相关第三方依赖 **/
+//    val picture = Picture
 
     /** RxJava系列框架 **/
     val rx = Rx()
@@ -49,9 +49,9 @@ object Sdks2 {
     @JvmField
     val mlKit33 = MLKit(33)
 
-    /** SmartRefreshLayout依赖集合 **/
-    @JvmField
-    val smart = Smart()
+//    /** SmartRefreshLayout依赖集合 **/
+//    @JvmField
+//    val smart = Smart()
 
     /** 控件相关第三方依赖 **/
     val view = View()

@@ -71,10 +71,16 @@ dependencies {
     api "com.github.getActivity:XToast:8.9"
     api "com.github.getActivity:ToastUtils:12.2"
 
+//    api "com.hbb20:android-country-picker:0.0.7"
+//    implementation 'io.github.ShawnLin013:number-picker:2.4.13'
+
+//    implementation "io.github.lucksiege:pictureselector:v3.11.1"
 //    implementation "com.leinardi.android:speed-dial:3.2.0"
 
 //    implementation 'com.github.gzu-liyujiang.AndroidPicker:Common:4.1.11'
 //    implementation 'io.github.architshah248.calendar:awesome-calendar:1.1.5'
 //    implementation "com.github.skydoves:colorpickerpreference:2.0.6"
-    implementation 'com.aminography:primedatepicker:3.6.1'
+
+
+//    implementation "io.github.architshah248.calendar:awesome-calendar:2.0.0"
 }

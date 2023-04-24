@@ -1,6 +1,5 @@
 package com.android.plugins.dependency
 
-import com.android.plugins.util.VersionUtils
 
 /**
  * 控件相关第三方依赖
@@ -8,25 +7,6 @@ import com.android.plugins.util.VersionUtils
  */
 @Suppress("UNUSED")
 class View {
-
-//    private val appUpdateVersion = VersionUtils.createDepVersion(
-//        targetSdkVersion,
-//        versionLte30 = "3.0.7",
-//        versionEq31 = "4.2.8",
-//    )
-
-    /// 版本号
-    private companion object Version {
-//        /** 浏览器 **/
-//        const val agentWeb = "v5.0.6-androidx"
-//
-//        /** ButterKnife快速布局 **/
-//        const val butterKnife = "10.2.3"
-
-        /** 刷新框架 **/
-        const val smartRefresh = "2.0.5"
-    }
-
 
     /** https://github.com/Justson/AgentWeb 【浏览器核心库】 **///https://github.com/Justson/AgentWeb
     val agentWeb = "com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx"
@@ -53,10 +33,8 @@ class View {
     val butterKnife = "com.jakewharton:butterknife:10.2.3"
     val butterKnifeCompiler = "com.jakewharton:butterknife-compiler:10.2.3"
 
-    /** https://github.com/ApplikeySolutions/CosmoCalendar  【日历控件】**/
+    /** https://github.com/ApplikeySolutions/CosmoCalendar  【日历控件】**///https://github.com/ApplikeySolutions/CosmoCalendar
     val calendarCosmo = "com.github.applikeysolutions:cosmocalendar:1.0.4"
-
-
 
     /** https://github.com/wendux/DSBridge-Android 【JS、Android交互框架】**///https://github.com/wendux/DSBridge-Android
     val dsBridge = "com.github.wendux:DSBridge-Android:3.0-SNAPSHOT"
@@ -82,12 +60,20 @@ class View {
     /** https://github.com/leinardi/FloatingActionButtonSpeedDial   【悬浮菜单】 **///https://github.com/leinardi/FloatingActionButtonSpeedDial
     val floatingActionButton31 = "com.leinardi.android:speed-dial:3.3.0"
 
+    /** https://github.com/bumptech/glide   【图片加载库】 **///https://github.com/bumptech/glide
+    val glide = "com.github.bumptech.glide:glide:4.15.1"
+
+    /** https://github.com/bumptech/glide   【图片加载库编译器】 **///https://github.com/bumptech/glide
+    val glideCompiler = "com.github.bumptech.glide:compiler:4.15.1"
+
     /** https://github.com/gyf-dev/ImmersionBar 【沉侵式】 **///https://github.com/gyf-dev/ImmersionBar
     val immersionBar = "com.geyifeng.immersionbar:immersionbar:3.2.2"
 
+    /** https://github.com/Curzibn/Luban    【鲁班图片压缩】 **///https://github.com/Curzibn/Luban
+    val luban = "top.zibin:Luban:1.1.8"
 
-    val material = "com.google.android.material:material:1.3.0"
-
+    /** 数字进度条 **///https://github.com/daimajia/NumberProgressBar
+    var numberProgress = "com.daimajia.numberprogressbar:library:1.4@aar"
 
     /** 列表控件 **/
     val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
@@ -100,7 +86,6 @@ class View {
 
     /** https://github.com/arjinmc/RecyclerViewDecoration   【列表分割线】 **///https://github.com/arjinmc/RecyclerViewDecoration
     val recyclerViewDecoration = "com.github.arjinmc:RecyclerViewDecoration:4.1.1"
-
 
     /** https://github.com/kyleduo/SwitchButton 【开关控件】 **///https://github.com/kyleduo/SwitchButton
     val switchButton = "com.kyleduo.switchbutton:library:2.1.0"
@@ -123,36 +108,42 @@ class View {
     /** https://github.com/iwgang/SimplifySpan  【文本处理】 **///https://github.com/iwgang/SimplifySpan
     val spannable = "com.github.iwgang:simplifyspan:2.1"
 
-//    //========================================================
-//    //====================Smart刷新框架部分====================
-//    //========================================================
-//
-//    /** (SmartRefreshLayout) 刷新核心依赖库 **///https://github.com/scwang90/SmartRefreshLayout
-//    var smartKernel = "com.scwang.smart:refresh-layout-kernel:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 经典刷新头 **/
-//    var smartHeaderClassic = "com.scwang.smart:refresh-header-classics:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 雷达刷新头 **/
-//    var smartHeaderRadar = "com.scwang.smart:refresh-header-radar:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 虚拟刷新头 **/
-//    var smartHeaderFalsify = "com.scwang.smart:refresh-header-falsify:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 谷歌刷新头 **/
-//    var smartHeaderMaterial = "com.scwang.smart:refresh-header-material:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 二级刷新头 **/
-//    var smartHeaderTwoLevel = "com.scwang.smart:refresh-header-two-level:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 球脉冲加载 **/
-//    var smartFooterBall = "com.scwang.smart:refresh-footer-ball:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 经典加载 **/
-//    var smartFooterClassic = "com.scwang.smart:refresh-footer-classics:${smartRefresh}"
-//
-//    /** (SmartRefreshLayout) 横向智能刷新框架 **///https://github.com/scwang90/SmartRefreshHorizontal
-//    var smartHorizontal = "com.scwang.smart:refresh-layout-horizontal:2.0.0"
+    /** https://github.com/H07000223/FlycoTabLayout 【Tab控件】 **///https://github.com/H07000223/FlycoTabLayout
+    val tabLayout = "io.github.h07000223:flycoTabLayout:3.0.0"
+
+    //========================================================
+    //====================Smart刷新框架部分====================
+    //========================================================
+
+    /** 刷新框架 **/
+    private val smartRefreshView = "2.0.5"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【刷新核心依赖库】 **///https://github.com/scwang90/SmartRefreshLayout
+    val smartKernel = "com.scwang.smart:refresh-layout-kernel:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【经典刷新头】 **/
+    val smartHeaderClassic = "com.scwang.smart:refresh-header-classics:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【雷达刷新头】 **/
+    val smartHeaderRadar = "com.scwang.smart:refresh-header-radar:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【虚拟刷新头】 **/
+    val smartHeaderFalsify = "com.scwang.smart:refresh-header-falsify:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【谷歌刷新头】 **/
+    val smartHeaderMaterial = "com.scwang.smart:refresh-header-material:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【二级刷新头】 **/
+    val smartHeaderTwoLevel = "com.scwang.smart:refresh-header-two-level:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【球脉冲加载】 **/
+    val smartFooterBall = "com.scwang.smart:refresh-footer-ball:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshLayout  【经典加载】 **/
+    val smartFooterClassic = "com.scwang.smart:refresh-footer-classics:$smartRefreshView"
+
+    /** https://github.com/scwang90/SmartRefreshHorizontal  【横向智能刷新框架】 **///https://github.com/scwang90/SmartRefreshHorizontal
+    val smartHorizontal = "com.scwang.smart:refresh-layout-horizontal:2.0.0"
 
     //========================================================
     //====================二维码相关框架部分====================
@@ -173,11 +164,6 @@ class View {
     /** https://github.com/ailiwean/NBZxing-Scale   【NBZxing灰度算法增强库】 **///https://github.com/ailiwean/NBZxing-Scale
     var zxingNbScale = "com.github.ailiwean:NBZxing-Scale:0.0.6"
 
-    /** 数字进度条 **///https://github.com/daimajia/NumberProgressBar
-    var numberProgress = "com.daimajia.numberprogressbar:library:1.4@aar"
-
-
-
     //========================================================
     //====================滑动条相关框架部分====================
     //========================================================
@@ -194,14 +180,31 @@ class View {
     /** https://github.com/Chrisvin/RubberPicker    【橡皮滑动条】**///https://github.com/Chrisvin/RubberPicker
     val seekbarRubber = "com.github.Chrisvin:RubberPicker:v1.5"
 
+    //========================================================
+    //====================评分组件相关框架部分===================
+    //========================================================
+
     /** https://github.com/zhanghai/MaterialRatingBar   【评分控件】 **///https://github.com/zhanghai/MaterialRatingBar
-    val ratingbarMaterial ="me.zhanghai.android.materialratingbar:library:1.4.0"
+    val ratingbarMaterial = "me.zhanghai.android.materialratingbar:library:1.4.0"
 
     /** https://github.com/williamyyu/SimpleRatingBar   【评分控件】 **///https://github.com/williamyyu/SimpleRatingBar
     val ratingbarSimple1 = "com.github.ome450901:SimpleRatingBar:1.5.1"
 
     /** https://github.com/FlyingPumba/SimpleRatingBar  【评分控件】 **///https://github.com/FlyingPumba/SimpleRatingBar
     val ratingbarSimple2 = "com.iarcuschin:simpleratingbar:0.1.5"
+
+    //========================================================
+    //=================弹窗、提示类相关框架部分==================
+    //========================================================
+
+    /** https://github.com/li-xiaojun/XPopup    【Popup弹窗】 **///https://github.com/li-xiaojun/XPopup
+    val popup = "com.github.li-xiaojun:XPopup:2.9.19"
+
+    /** https://github.com/li-xiaojun/XPopupExt 【Popup弹窗扩展】 **///https://github.com/li-xiaojun/XPopupExt
+    val popupExt = "com.github.li-xiaojun:XPopupExt:1.0.0"
+
+    /** https://github.com/li-xiaojun/EasyAdapter   【Popup弹窗内部适配器】 **///https://github.com/li-xiaojun/EasyAdapter
+    val popupAdapter = "com.github.li-xiaojun:EasyAdapter:1.2.9"
 
     /** https://github.com/getActivity/ToastUtils   【Toast弹窗】 **///https://github.com/getActivity/ToastUtils
     val toastUtils = "com.github.getActivity:ToastUtils:12.2"
@@ -211,8 +214,5 @@ class View {
 
     /** https://github.com/sephiroth74/android-target-tooltip   【工具提示窗】 **///https://github.com/sephiroth74/android-target-tooltip
     val tooltip = "it.sephiroth.android.library.targettooltip:target-tooltip-library:2.0.5"
-
-    /** https://github.com/H07000223/FlycoTabLayout 【Tab控件】 **///https://github.com/H07000223/FlycoTabLayout
-    val tabLayout = "io.github.h07000223:flycoTabLayout:3.0.0"
 
 }

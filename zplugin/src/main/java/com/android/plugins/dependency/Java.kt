@@ -10,6 +10,10 @@ open class Java {
     /** 组件化框架 **///
     val autoService = "com.google.auto.service:auto-service:1.0.1"
 
+
+    /** https://github.com/google/gson  【Json格式转换】**///https://github.com/google/gson
+    val gson = "com.google.code.gson:gson:2.10.1"
+
     /** JWT加密 **///https://github.com/auth0/java-jwt
     val jwt = "com.auth0:java-jwt:4.0.0"
 

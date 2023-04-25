@@ -9,9 +9,8 @@
 ```
 apply plugin: 'com.android.plugin'
 ```
-### 第三步
-
-编译配置，只能在App模块使用。启用了会在每个模块加入相应的编译的依赖。
+### 编译配置
+只能在App模块使用。启用了会在每个模块加入相应的编译的依赖。
 ```
 open class CompilerOptions {
 
@@ -29,8 +28,26 @@ open class CompilerOptions {
 
 }
 ```
+在build.gradle中的使用
+```
+android {
 
-模块配置，启用了会导入相关依赖
+}
+
+compilerOptions {
+    butterKnifeEnabled true
+    componentEnabled true
+    lombokEnabled true
+    serviceEnabled true
+}
+
+dependencies {
+
+}
+```
+
+### 模块配置
+启用了会导入相关依赖
 ```
 open class ModuleOptions {
 
@@ -60,6 +77,29 @@ open class ModuleOptions {
 
     /** 是否启用Rxjava3 **/
     var rxjava3Enabled = false
+
+}
+```
+
+在build.gradle中的使用
+```
+android {
+
+}
+
+compilerOptions {
+    butterKnifeEnabled true
+    coroutineEnabled true
+    componentEnabled true
+    lombokEnabled true
+    serviceEnabled true
+    retrofitEnabled true
+    roomEnabled true
+    rxjava2Enabled true
+    rxjava3Enabled true
+}
+
+dependencies {
 
 }
 ```

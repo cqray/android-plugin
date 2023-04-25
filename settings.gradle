@@ -1,5 +1,4 @@
+rootProject.name = "android-plugin"
 include ':app'
-rootProject.name = "BuildSrcDemo"
-//include("zplugin")
-includeBuild("zplugin")
-include ':testLibrary'
+include ':library'
+//includeBuild("zplugin")

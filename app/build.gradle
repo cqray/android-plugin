@@ -1,7 +1,4 @@
-import com.android.plugin.Sdks
-
 apply plugin: 'com.android.application'
-apply plugin: 'com.android.plugin'
 apply plugin: 'kotlin-android'
 
 android {
@@ -30,70 +27,22 @@ android {
 
 }
 
-//compilerOptions {
 //
-//    componentEnabled true
-//}
-
-moduleOptions {
-
-    coroutineEnabled true
-//    roomEnabled true
-//    rxjava2Enabled true
-
+//moduleOptions {
+//
 //    coroutineEnabled true
-    lombokEnabled true
-//    butterKnifeEnabled true
-}
+//    lombokEnabled true
+//}
 
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.3.1'
-//    implementation 'androidx.core:core:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.3.0'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     api "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-//    api "com.github.iwgang:simplifyspan:2.1"
-//
-//    api "com.geyifeng.immersionbar:immersionbar:3.2.2"
-//    implementation 'com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx'
-//    implementation 'io.github.azhon:appupdate:3.0.7'
-    api "com.github.ome450901:SimpleRatingBar:1.5.1"
-//    api Sdks.jetpack.coroutinesViewModel
-    api "androidx.room:room-runtime:2.3.0"
-    api "androidx.recyclerview:recyclerview:1.2.1"
-//    implementation "com.github.skydoves:powerspinner:1.2.5"
-////    api Sdks2.jetpack30.coroutineAndroid
-//    api Sdks2.jetpack30.coroutineAndroid
 
-    api "com.github.getActivity:XToast:8.9"
-    api "com.github.getActivity:ToastUtils:12.2"
-
-//    api "com.hbb20:android-country-picker:0.0.7"
-//    implementation 'io.github.ShawnLin013:number-picker:2.4.13'
-
-//    implementation "io.github.lucksiege:pictureselector:v3.11.1"
-//    implementation "com.leinardi.android:speed-dial:3.2.0"
-
-//    implementation 'com.github.gzu-liyujiang.AndroidPicker:Common:4.1.11'
-//    implementation 'io.github.architshah248.calendar:awesome-calendar:1.1.5'
-//    implementation "com.github.skydoves:colorpickerpreference:2.0.6"
-
-
-//    implementation "io.github.architshah248.calendar:awesome-calendar:2.0.0"
-
-//    implementation "com.github.Petterpx:FloatingX:1.2.4"
-
-    implementation "io.karn:notify:1.4.0"
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-//    compile 'me.codeboy.android:align-text-view:2.3.2'
-//    implementation 'com.github.rosenpin:fading-text-view:3.0'
-    implementation 'com.github.Vove7:Android-Accessibility-Api:3.0.3'
-
-//    Sdks.tool.ariaDownload
 }

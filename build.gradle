@@ -15,7 +15,7 @@ buildscript {
 }
 
 //// 引入版本管理插件
-plugins { id "com.android.plugin" apply false }
+//plugins { id "com.android.plugin" apply false }
 
 allprojects {
     repositories {

@@ -2,7 +2,6 @@ package com.android.plugin.configuration
 
 import cn.hutool.core.io.FileUtil
 import cn.hutool.core.util.StrUtil
-import com.android.plugin.Android
 import com.android.plugin.options.CompilerOptions
 import com.android.plugin.options.ModuleOptions
 import com.android.plugin.util.CharsetUtils
@@ -53,32 +52,6 @@ class GradleBuildConfiguration {
         parseCompilerOptions(lines)
     }
 
-    fun addJavaCompileOptions() {
-        // 获取当前项目下的build.gradle文件
-        val file = File(project.projectDir, "build.gradle")
-        // 获取文件编码
-        val charset = CharsetUtils.getCharset(file)
-        // 获取内容为行
-        val lines = FileUtil.readLines(file, charset)
-        // 找到索引
-        val indexArray = findIndex(lines, "defaultConfig")
-        indexArray?.let {
-            val hasJavaCompileOptions = findIndex(lines, "javaCompileOptions") != null
-            if (!hasJavaCompileOptions) {
-                val start = lines[indexArray[1]].replace("}", "")
-                lines.addAll(indexArray[1] - 1, mutableListOf(
-                    "${start}javaCompileOptions {",
-                    "$start    annotationProcessorOptions {",
-                    "$start        arguments += [ \"HOST\"     : project.getName()]",
-                    "$start    }",
-                    "$start}"
-
-                ))
-            }
-        }
-        FileUtil.writeLines(lines, file, charset)
-    }
-
     private fun parseAndroid(lines: List<String>) {
         android = com.android.plugin.Android()
         // 属性集1
@@ -100,7 +73,7 @@ class GradleBuildConfiguration {
     private fun parseModuleOptions(lines: List<String>) {
         // 初始化选项
         moduleOptions = ModuleOptions()
-        findAndErgodic(lines, "pluginOptions") {
+        findAndErgodic(lines, "moduleOptions") {
             setObjectField(moduleOptions, it, "butterKnifeEnabled", Boolean::class.java)
             setObjectField(moduleOptions, it, "coroutineEnabled", Boolean::class.java)
             setObjectField(moduleOptions, it, "lombokEnabled", Boolean::class.java)
@@ -116,7 +89,7 @@ class GradleBuildConfiguration {
     private fun parseCompilerOptions(lines: List<String>) {
         // 初始化选项
         compilerOptions = CompilerOptions()
-        findAndErgodic(lines, "pluginOptions") {
+        findAndErgodic(lines, "compilerOptions") {
             setObjectField(compilerOptions, it, "butterKnifeEnabled", Boolean::class.java)
             setObjectField(compilerOptions, it, "lombokEnabled", Boolean::class.java)
             setObjectField(compilerOptions, it, "componentEnabled", Boolean::class.java)

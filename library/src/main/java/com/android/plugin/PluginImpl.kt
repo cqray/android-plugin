@@ -98,7 +98,7 @@ open class PluginImpl : Plugin<Project> {
             project.dependencies.add("api", Sdks.view.butterKnife)
             project.dependencies.add("annotationProcessor", Sdks.view.butterKnifeCompiler)
             runCatching { project.dependencies.add("kapt", Sdks.view.butterKnifeCompiler) }
-            println("===${project.name + " implementation ButterKnife."}===")
+            println("===${project.name + " implementation ButterKnife"}===")
         }
     }
 
@@ -112,7 +112,7 @@ open class PluginImpl : Plugin<Project> {
             project.dependencies.add("api", Sdks.view.component)
             project.dependencies.add("annotationProcessor", Sdks.view.componentCompiler)
             runCatching { project.dependencies.add("kapt", Sdks.view.componentCompiler) }
-            println("===${project.name + " implementation Component."}===")
+            println("===${project.name + " implementation Component"}===")
         }
     }
 
@@ -128,7 +128,7 @@ open class PluginImpl : Plugin<Project> {
             project.dependencies.add("api", androidx.lifecycleLivedataKtx)
             project.dependencies.add("api", androidx.lifecycleRuntimeKtx)
             project.dependencies.add("api", androidx.lifecycleViewModelKtx)
-            println("===${project.name + " implementation Kotlin-Coroutines."}===")
+            println("===${project.name + " implementation Kotlin-Coroutines"}===")
         }
     }
 
@@ -142,7 +142,7 @@ open class PluginImpl : Plugin<Project> {
             project.dependencies.add("compileOnly", Sdks.java.lombok)
             project.dependencies.add("annotationProcessor", Sdks.java.lombok)
             runCatching { project.dependencies.add("kapt", Sdks.java.lombok) }
-            println("===${project.name + " implementation Lombok."}===")
+            println("===${project.name + " implementation Lombok"}===")
         }
     }
 
@@ -160,7 +160,7 @@ open class PluginImpl : Plugin<Project> {
             project.dependencies.add("api", Sdks.web.okHttp3Log)
             if (rxjava2Enabled) project.dependencies.add("api", Sdks.web.retrofitRx2Adapter)
             if (rxjava3Enabled) project.dependencies.add("api", Sdks.web.retrofitRx3Adapter)
-            println("===${project.name + " implementation Retrofit."}===")
+            println("===${project.name + " implementation Retrofit"}===")
         }
     }
 
@@ -184,7 +184,7 @@ open class PluginImpl : Plugin<Project> {
             if (rxjava3Enabled) project.dependencies.add("api", androidX.roomRxjava3)
             // 启用协程
             if (coroutineEnabled) project.dependencies.add("api", androidX.roomCoroutine)
-            println("===${project.name + " implementation Room."}===")
+            println("===${project.name + " implementation Room"}===")
         }
     }
 
@@ -197,7 +197,7 @@ open class PluginImpl : Plugin<Project> {
         if (isSdkEnabled(configuration) { it?.rxjava2Enabled }) {
             project.dependencies.add("api", Sdks.rx.java2)
             project.dependencies.add("api", Sdks.rx.android2)
-            println("===${project.name + " implementation Rxjava2."}===")
+            println("===${project.name + " implementation Rxjava2"}===")
         }
     }
 
@@ -210,7 +210,7 @@ open class PluginImpl : Plugin<Project> {
         if (isSdkEnabled(configuration) { it?.rxjava3Enabled }) {
             project.dependencies.add("api", Sdks.rx.java3)
             project.dependencies.add("api", Sdks.rx.android3)
-            println("===${project.name + " implementation Rxjava3."}===")
+            println("===${project.name + " implementation Rxjava3"}===")
         }
     }
 
@@ -224,7 +224,7 @@ open class PluginImpl : Plugin<Project> {
             project.dependencies.add("api", Sdks.java.autoService)
             project.dependencies.add("annotationProcessor", Sdks.java.autoService)
             runCatching { project.dependencies.add("kapt", Sdks.java.autoService) }
-            println("===${project.name + " implementation AutoService."}===")
+            println("===${project.name + " implementation AutoService"}===")
         }
     }
 

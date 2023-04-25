@@ -58,7 +58,7 @@ publishing {
             from components.java
             // You can then customize attributes of the publication as shown below.
             groupId = 'com.github.cqray'
-            artifactId = 'test-plugin'
+            artifactId = 'android-plugin'
         }
     }
 }

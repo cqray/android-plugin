@@ -1,6 +1,5 @@
 buildscript {
 
-//    ext.kotlin_version = '1.5.31'
     ext.kotlin_version = '1.6.21'
     repositories {
         google()
@@ -11,11 +10,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-//
-//plugins {
-//    id 'maven-publish'
-//}
-
 
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'kotlin'
@@ -27,15 +21,10 @@ dependencies {
     implementation gradleApi()
     // 工具类
     implementation 'cn.hutool:hutool-core:5.7.22'
+    // Json格式化
+    implementation 'com.google.code.gson:gson:2.10.1'
     // 注解框架
     compileOnly 'org.jetbrains:annotations:20.1.0'
-    // Json格式化
-    compileOnly 'com.google.code.gson:gson:2.8.9'
-
-//    // Lombok框架
-//    // noinspection AnnotationProcessorOnCompilePath
-//    compileOnly 'org.projectlombok:lombok:1.18.20'
-//    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
 compileKotlin {
@@ -54,9 +43,9 @@ gradlePlugin {
     plugins {
         version {
             // 在 app 模块需要通过 id 引用这个插件
-            id = 'com.android.plugins'
+            id = 'com.android.plugin'
             // 实现这个插件的类的路径
-            implementationClass = 'com.android.plugins.PluginImpl'
+            implementationClass = 'com.android.plugin.PluginImpl'
         }
     }
 }

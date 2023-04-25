@@ -10,7 +10,6 @@ import io.karn.notify.entities.Payload;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

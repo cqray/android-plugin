@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.library'
-//    id 'com.android.plugins'
 }
 
 android {
@@ -26,11 +25,6 @@ android {
     }
 }
 
-//moduleOptions {
-//    coroutineEnabled true
-//    roomEnabled true
-//    rxjava2Enabled true
-//}
 
 dependencies {
 

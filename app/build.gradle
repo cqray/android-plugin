@@ -1,7 +1,7 @@
-import com.android.plugins.Sdks
+import com.android.plugin.Sdks
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.android.plugins'
+apply plugin: 'com.android.plugin'
 apply plugin: 'kotlin-android'
 
 android {
@@ -27,23 +27,24 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
-//pluginOptions {
+//compilerOptions {
 //
-//    lombokEnabled true
+//    componentEnabled true
 //}
 
-//pluginOptions {
-//
+moduleOptions {
+
+    coroutineEnabled true
+//    roomEnabled true
+//    rxjava2Enabled true
+
 //    coroutineEnabled true
-////    roomEnabled true
-////    rxjava2Enabled true
-//
-////    coroutineEnabled true
-//    lombokEnabled true
-////    butterKnifeEnabled true
-//}
+    lombokEnabled true
+//    butterKnifeEnabled true
+}
 
 
 dependencies {
@@ -94,4 +95,5 @@ dependencies {
 //    implementation 'com.github.rosenpin:fading-text-view:3.0'
     implementation 'com.github.Vove7:Android-Accessibility-Api:3.0.3'
 
+//    Sdks.tool.ariaDownload
 }

@@ -5,7 +5,7 @@ package com.android.plugin.dependency
  * @author Cqray
  */
 @Suppress("Unused")
-class Chart {
+open class Chart {
 
     /** https://github.com/PhilJay/MPAndroidChart   【图表控件】 **///https://github.com/PhilJay/MPAndroidChart
     val mpAndroidChart = "com.github.PhilJay:MPAndroidChart:v3.1.0"

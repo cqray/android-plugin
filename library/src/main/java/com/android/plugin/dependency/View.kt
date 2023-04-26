@@ -6,7 +6,7 @@ package com.android.plugin.dependency
  * @author LeiJue
  */
 @Suppress("UNUSED")
-class View {
+open class View {
 
     /** https://github.com/azhon/AppUpdate  【APP升级功能】 **///https://github.com/azhon/AppUpdate
     val appUpdate = "com.github.azhon:AppUpdate:3.0.7"

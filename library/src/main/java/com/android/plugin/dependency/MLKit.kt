@@ -7,7 +7,7 @@ import com.android.plugin.util.VersionUtils
  * @author Cqray
  */
 @Suppress("Unused")
-class MLKit(targetSdkVersion: Int) {
+open class MLKit(targetSdkVersion: Int) {
 
     /** 根据目标版本获取依赖对应版本 **/
     private val version = VersionUtils.createDepVersion(

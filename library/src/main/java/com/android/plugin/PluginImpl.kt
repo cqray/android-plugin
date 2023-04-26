@@ -95,9 +95,9 @@ open class PluginImpl : Plugin<Project> {
     private fun loadButterKnife(configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(configuration) { it?.butterKnifeEnabled }) {
-            project.dependencies.add("api", Sdks.view.butterKnife)
-            project.dependencies.add("annotationProcessor", Sdks.view.butterKnifeCompiler)
-            runCatching { project.dependencies.add("kapt", Sdks.view.butterKnifeCompiler) }
+            project.dependencies.add("api", Sdks2.view.butterKnife)
+            project.dependencies.add("annotationProcessor", Sdks2.view.butterKnifeCompiler)
+            runCatching { project.dependencies.add("kapt", Sdks2.view.butterKnifeCompiler) }
             println("===${project.name + " implementation ButterKnife"}===")
         }
     }
@@ -109,9 +109,9 @@ open class PluginImpl : Plugin<Project> {
     private fun loadComponent(configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(configuration) { it?.componentEnabled }) {
-            project.dependencies.add("api", Sdks.view.component)
-            project.dependencies.add("annotationProcessor", Sdks.view.componentCompiler)
-            runCatching { project.dependencies.add("kapt", Sdks.view.componentCompiler) }
+            project.dependencies.add("api", Sdks2.view.component)
+            project.dependencies.add("annotationProcessor", Sdks2.view.componentCompiler)
+            runCatching { project.dependencies.add("kapt", Sdks2.view.componentCompiler) }
             println("===${project.name + " implementation Component"}===")
         }
     }
@@ -139,9 +139,9 @@ open class PluginImpl : Plugin<Project> {
     private fun loadLombok(configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(configuration) { it?.lombokEnabled }) {
-            project.dependencies.add("compileOnly", Sdks.java.lombok)
-            project.dependencies.add("annotationProcessor", Sdks.java.lombok)
-            runCatching { project.dependencies.add("kapt", Sdks.java.lombok) }
+            project.dependencies.add("compileOnly", Sdks2.java.lombok)
+            project.dependencies.add("annotationProcessor", Sdks2.java.lombok)
+            runCatching { project.dependencies.add("kapt", Sdks2.java.lombok) }
             println("===${project.name + " implementation Lombok"}===")
         }
     }
@@ -155,11 +155,11 @@ open class PluginImpl : Plugin<Project> {
         val rxjava2Enabled = isSdkEnabled(configuration) { it?.rxjava2Enabled }
         val rxjava3Enabled = isSdkEnabled(configuration) { it?.rxjava3Enabled }
         if (isSdkEnabled(configuration) { it?.retrofitEnabled }) {
-            project.dependencies.add("api", Sdks.web.retrofit)
-            project.dependencies.add("api", Sdks.web.retrofitGsonConverter)
-            project.dependencies.add("api", Sdks.web.okHttp3Log)
-            if (rxjava2Enabled) project.dependencies.add("api", Sdks.web.retrofitRx2Adapter)
-            if (rxjava3Enabled) project.dependencies.add("api", Sdks.web.retrofitRx3Adapter)
+            project.dependencies.add("api", Sdks2.web.retrofit)
+            project.dependencies.add("api", Sdks2.web.retrofitGsonConverter)
+            project.dependencies.add("api", Sdks2.web.okHttp3Log)
+            if (rxjava2Enabled) project.dependencies.add("api", Sdks2.web.retrofitRx2Adapter)
+            if (rxjava3Enabled) project.dependencies.add("api", Sdks2.web.retrofitRx3Adapter)
             println("===${project.name + " implementation Retrofit"}===")
         }
     }
@@ -175,7 +175,7 @@ open class PluginImpl : Plugin<Project> {
         val coroutineEnabled = isSdkEnabled(configuration) { it?.coroutineEnabled }
         if (isSdkEnabled(configuration) { it?.roomEnabled }) {
             val androidX = AndroidX(getTargetSdkVersion(configuration))
-            project.dependencies.add("api", Sdks.androidx.roomRuntime)
+            project.dependencies.add("api", Sdks2.androidx.roomRuntime)
             project.dependencies.add("annotationProcessor", androidX.roomCompiler)
             runCatching { project.dependencies.add("kapt", androidX.roomCompiler) }
             // 启用rxjava2
@@ -195,8 +195,8 @@ open class PluginImpl : Plugin<Project> {
     private fun loadRxjava2(configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(configuration) { it?.rxjava2Enabled }) {
-            project.dependencies.add("api", Sdks.rx.java2)
-            project.dependencies.add("api", Sdks.rx.android2)
+            project.dependencies.add("api", Sdks2.rx.java2)
+            project.dependencies.add("api", Sdks2.rx.android2)
             println("===${project.name + " implementation Rxjava2"}===")
         }
     }
@@ -208,8 +208,8 @@ open class PluginImpl : Plugin<Project> {
     private fun loadRxjava3(configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(configuration) { it?.rxjava3Enabled }) {
-            project.dependencies.add("api", Sdks.rx.java3)
-            project.dependencies.add("api", Sdks.rx.android3)
+            project.dependencies.add("api", Sdks2.rx.java3)
+            project.dependencies.add("api", Sdks2.rx.android3)
             println("===${project.name + " implementation Rxjava3"}===")
         }
     }
@@ -221,9 +221,9 @@ open class PluginImpl : Plugin<Project> {
     private fun loadService(configuration: GradleBuildConfiguration) {
         val project = configuration.project
         if (isSdkEnabled(configuration) { it?.serviceEnabled }) {
-            project.dependencies.add("api", Sdks.java.autoService)
-            project.dependencies.add("annotationProcessor", Sdks.java.autoService)
-            runCatching { project.dependencies.add("kapt", Sdks.java.autoService) }
+            project.dependencies.add("api", Sdks2.java.autoService)
+            project.dependencies.add("annotationProcessor", Sdks2.java.autoService)
+            runCatching { project.dependencies.add("kapt", Sdks2.java.autoService) }
             println("===${project.name + " implementation AutoService"}===")
         }
     }
@@ -237,20 +237,20 @@ open class PluginImpl : Plugin<Project> {
         val options = configuration.compilerOptions
         applicationConfigurations.forEach { options.merge(it.compilerOptions) }
         if (options.butterKnifeEnabled) {
-            project.dependencies.add("annotationProcessor", Sdks.view.butterKnifeCompiler)
-            runCatching { project.dependencies.add("kapt", Sdks.view.butterKnifeCompiler) }
+            project.dependencies.add("annotationProcessor", Sdks2.view.butterKnifeCompiler)
+            runCatching { project.dependencies.add("kapt", Sdks2.view.butterKnifeCompiler) }
         }
         if (options.componentEnabled) {
-            project.dependencies.add("annotationProcessor", Sdks.view.componentCompiler)
-            runCatching { project.dependencies.add("kapt", Sdks.view.componentCompiler) }
+            project.dependencies.add("annotationProcessor", Sdks2.view.componentCompiler)
+            runCatching { project.dependencies.add("kapt", Sdks2.view.componentCompiler) }
         }
         if (options.lombokEnabled) {
-            project.dependencies.add("annotationProcessor", Sdks.java.lombok)
-            runCatching { project.dependencies.add("kapt", Sdks.java.lombok) }
+            project.dependencies.add("annotationProcessor", Sdks2.java.lombok)
+            runCatching { project.dependencies.add("kapt", Sdks2.java.lombok) }
         }
         if (options.serviceEnabled) {
-            project.dependencies.add("annotationProcessor", Sdks.java.autoService)
-            runCatching { project.dependencies.add("kapt", Sdks.java.autoService) }
+            project.dependencies.add("annotationProcessor", Sdks2.java.autoService)
+            runCatching { project.dependencies.add("kapt", Sdks2.java.autoService) }
         }
     }
 

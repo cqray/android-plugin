@@ -5,7 +5,7 @@ package com.android.plugin.dependency
  * @author Cqray
  */
 @Suppress("Unused")
-class Tip {
+open class Tip {
 
     /** https://github.com/Petterpx/FloatingX   【悬浮窗框架】**///https://github.com/Petterpx/FloatingX
     val floatingX = "com.github.Petterpx:FloatingX:1.2.4"

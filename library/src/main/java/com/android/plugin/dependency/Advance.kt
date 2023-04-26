@@ -5,7 +5,7 @@ package com.android.plugin.dependency
  * @author Cqray
  */
 @Suppress("Unused")
-class Advance {
+open class Advance {
 
     /** androidBle库版本 **/
     private val androidBleVersion = "2.6.1"

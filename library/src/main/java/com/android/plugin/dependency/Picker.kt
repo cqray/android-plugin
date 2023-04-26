@@ -5,7 +5,7 @@ package com.android.plugin.dependency
  * @author LeiJue
  */
 @Suppress("Unused")
-class Picker {
+open class Picker {
 
     //========================================================
     //===============AndroidPicker相关框架部分==================

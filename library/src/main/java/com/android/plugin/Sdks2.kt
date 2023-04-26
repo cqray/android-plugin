@@ -3,7 +3,7 @@ package com.android.plugin
 import com.android.plugin.dependency.*
 
 @Suppress("Unused")
-object Sdks {
+object Sdks2 {
 
     @JvmField
     val advance = Advance()

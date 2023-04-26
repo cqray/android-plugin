@@ -1,7 +1,7 @@
 package com.android.plugin.dependency
 
 @Suppress("Unused")
-class Text {
+open class Text {
 
     /** https://github.com/androiddevelop/AlignTextView 【字体对齐的TextView】 **///https://github.com/androiddevelop/AlignTextView
     val alignTextView = "me.codeboy.android:align-text-view:2.3.2"

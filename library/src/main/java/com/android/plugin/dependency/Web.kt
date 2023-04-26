@@ -5,7 +5,7 @@ package com.android.plugin.dependency
  * @author Cqray
  */
 @Suppress("Unused")
-class Web {
+open class Web {
 
     //========================================================
     //======================OkHttp3框架部分====================

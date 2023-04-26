@@ -1,4 +1,4 @@
 rootProject.name = "android-plugin"
 include ':app'
-//include ':library'
-includeBuild("library")
+include ':library'
+//includeBuild("library")

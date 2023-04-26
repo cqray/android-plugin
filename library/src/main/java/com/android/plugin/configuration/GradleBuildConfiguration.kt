@@ -50,6 +50,8 @@ class GradleBuildConfiguration {
         parseModuleOptions(lines)
         // 解析CompilerOptions
         parseCompilerOptions(lines)
+        // 自动导入
+        autoImport(lines)
     }
 
     private fun parseAndroid(lines: List<String>) {
@@ -94,6 +96,21 @@ class GradleBuildConfiguration {
             setObjectField(compilerOptions, it, "lombokEnabled", Boolean::class.java)
             setObjectField(compilerOptions, it, "componentEnabled", Boolean::class.java)
             setObjectField(compilerOptions, it, "serviceEnabled", Boolean::class.java)
+        }
+    }
+
+    private fun autoImport(lines: List<String>) {
+        val importStr = "com.android.plugin.Sdks"
+        val hasSdksDependency = findIndex(lines, "Sdks.") != null
+        val importIndex = findIndex(lines, importStr)
+        if (hasSdksDependency && importIndex == null) {
+            val file = File(project.projectDir, "build.gradle")
+            val charset = CharsetUtils.getCharset(file)
+            val newLines = mutableListOf<String>().also {
+                it.add("import $importStr")
+                it.addAll(lines)
+            }
+            FileUtil.writeLines(newLines, file, charset)
         }
     }
 

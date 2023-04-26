@@ -31,7 +31,7 @@ open class View {
     val componentCompiler = "com.github.xiaojinzi123.Component:component-compiler:v1.9.2.1-androidx-java8"
 
     /** https://github.com/getActivity/XXPermissions    【权限请求】 **///https://github.com/getActivity/XXPermissions
-    val permission = "https://github.com/getActivity/XXPermissions"
+    val permission = "com.github.getActivity:XXPermissions:18.0"
 
     /** https://github.com/ApplikeySolutions/CosmoCalendar  【日历控件】**///https://github.com/ApplikeySolutions/CosmoCalendar
     val calendarCosmo = "com.github.applikeysolutions:cosmocalendar:1.0.4"
@@ -46,7 +46,7 @@ open class View {
     val expandableLayoutKtx = "com.github.skydoves:expandablelayout:1.0.7"
 
     /** https://github.com/google/flexbox-layout    【FlexBox】 **///https://github.com/google/flexbox-layout
-    val flexbox = "com.google.android:flexbox:3.0.0"
+    val flexbox = "com.google.android.flexbox:flexbox:3.0.0"
 
     /** https://github.com/leinardi/FloatingActionButtonSpeedDial   【悬浮菜单】 **///https://github.com/leinardi/FloatingActionButtonSpeedDial
     val floatingActionButton = "com.leinardi.android:speed-dial:3.2.0"

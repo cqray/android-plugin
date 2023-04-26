@@ -1,4 +1,6 @@
+//import com.android.plugin.Sdks
 apply plugin: 'com.android.application'
+//apply plugin: 'com.android.plugin'
 apply plugin: 'kotlin-android'
 
 android {
@@ -44,6 +46,4 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     api "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-
-//    api Sdk3.advance.albumCameraRecorder
 }

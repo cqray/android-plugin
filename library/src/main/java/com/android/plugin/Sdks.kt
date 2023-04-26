@@ -3,65 +3,65 @@ package com.android.plugin
 import com.android.plugin.dependency.*
 
 @Suppress("Unused")
-object Sdks2 {
+object Sdks {
 
-    @JvmField
+    @JvmStatic
     val advance = Advance()
 
-    @JvmField
+    @JvmStatic
     val androidx = AndroidX(30)
 
-    @JvmField
+    @JvmStatic
     val androidx31 = AndroidX(31)
 
     /** 各种图表库 **/
-    @JvmField
+    @JvmStatic
     val chart = Chart()
 
     /** Cqray下第三方依赖 **/
-    @JvmField
+    @JvmStatic
     val cqray = Cqray()
 
     /** Java第三方依赖 **/
-    @JvmField
+    @JvmStatic
     val java = Java()
 
     /** MLKit依赖集合（api<=30） **/
-    @JvmField
+    @JvmStatic
     val mlKit30 = MLKit(30)
 
     /** MLKit依赖集合（api31） **/
-    @JvmField
+    @JvmStatic
     val mlKit31 = MLKit(31)
 
     /** MLKit依赖集合（api33） **/
-    @JvmField
+    @JvmStatic
     val mlKit33 = MLKit(33)
 
     /** 选择器 **/
-    @JvmField
+    @JvmStatic
     val picker = Picker()
 
     /** RxJava系列框架 **/
-    @JvmField
+    @JvmStatic
     val rx = Rx()
 
     /** 弹窗、提示类框架集合 **/
-    @JvmField
+    @JvmStatic
     val tip = Tip()
 
-    @JvmField
+    @JvmStatic
     val text = Text()
 
     /** 工具集合 **/
-    @JvmField
+    @JvmStatic
     val tool = Tool()
 
     /** 控件相关第三方依赖 **/
-    @JvmField
+    @JvmStatic
     val view = View()
 
     /** 网络请求依赖集合 **/
-    @JvmField
+    @JvmStatic
     val web = Web()
 }

@@ -17,7 +17,7 @@ import com.android.plugin.dependency.Web;
 /**
  * @author PC
  */
-public class Sdks {
+public class Sdks3 {
 
     public static Advance advance = new Advance();
 
